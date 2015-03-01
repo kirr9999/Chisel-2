@@ -156,16 +156,6 @@ public class CTM {
          */
         if (side == 0) {
             //TODO:
-            b[0] = isConnected(world, x - 1, y, z - 1, side, block, blockMetadata);
-            b[1] = isConnected(world, x, y, z - 1, side, block, blockMetadata);
-            b[2] = isConnected(world, x + 1, y, z - 1, side, block, blockMetadata);
-            b[3] = isConnected(world, x - 1, y, z, side, block, blockMetadata);
-            b[4] = isConnected(world, x + 1, y, z, side, block, blockMetadata);
-            b[5] = isConnected(world, x - 1, y, z + 1, side, block, blockMetadata);
-            b[6] = isConnected(world, x, y, z + 1, side, block, blockMetadata);
-            b[7] = isConnected(world, x + 1, y, z + 1, side, block, blockMetadata);
-        } else if (side == 1) {
-            //TODO:
             b[0] = isConnected(world, x - 1, y, z + 1, side, block, blockMetadata);
             b[1] = isConnected(world, x, y, z + 1, side, block, blockMetadata);
             b[2] = isConnected(world, x + 1, y, z + 1, side, block, blockMetadata);
@@ -174,6 +164,16 @@ public class CTM {
             b[5] = isConnected(world, x - 1, y, z - 1, side, block, blockMetadata);
             b[6] = isConnected(world, x, y, z - 1, side, block, blockMetadata);
             b[7] = isConnected(world, x + 1, y, z - 1, side, block, blockMetadata);
+        } else if (side == 1) {
+            //TODO:
+            b[0] = isConnected(world, x - 1, y, z - 1, side, block, blockMetadata);
+            b[1] = isConnected(world, x, y, z - 1, side, block, blockMetadata);
+            b[2] = isConnected(world, x + 1, y, z - 1, side, block, blockMetadata);
+            b[3] = isConnected(world, x - 1, y, z, side, block, blockMetadata);
+            b[4] = isConnected(world, x + 1, y, z, side, block, blockMetadata);
+            b[5] = isConnected(world, x - 1, y, z + 1, side, block, blockMetadata);
+            b[6] = isConnected(world, x, y, z + 1, side, block, blockMetadata);
+            b[7] = isConnected(world, x + 1, y, z + 1, side, block, blockMetadata);
 		} else if (side == 2) {
             //TODO:
 			b[0] = isConnected(world, x + 1, y + 1, z, side, block, blockMetadata);

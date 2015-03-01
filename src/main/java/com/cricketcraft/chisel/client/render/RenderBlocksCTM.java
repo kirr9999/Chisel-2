@@ -332,7 +332,7 @@ public class RenderBlocksCTM extends RenderBlocks {
 			tessellator.addVertexWithUV(1.0, 0.0, 0.0, i.getMaxU(), i.getMinV());
 			tessellator.addVertexWithUV(1.0, 0.0, 1.0, i.getMaxU(), i.getMaxV());
 		} else {
-			int tex[] = CTM.getSubmapIndices(blockAccess, bx, by, bz, 1);
+			int tex[] = CTM.getSubmapIndices(blockAccess, bx, by, bz, 0);
 
             fillLightmap(brightnessBottomLeft, brightnessBottomRight, brightnessTopRight, brightnessTopLeft);
             getLight(0, 0);
@@ -356,7 +356,7 @@ public class RenderBlocksCTM extends RenderBlocks {
 			tessellator.addVertexWithUV(1.0, 1.0, 1.0, i.getMaxU(), i.getMaxV());
 			tessellator.addVertexWithUV(1.0, 1.0, 0.0, i.getMaxU(), i.getMinV());
 		} else {
-			int tex[] = CTM.getSubmapIndices(blockAccess, bx, by, bz, 0);
+			int tex[] = CTM.getSubmapIndices(blockAccess, bx, by, bz, 1);
 
             fillLightmap(brightnessTopRight, brightnessTopLeft, brightnessBottomLeft, brightnessBottomRight);
             getLight(0, 0);
