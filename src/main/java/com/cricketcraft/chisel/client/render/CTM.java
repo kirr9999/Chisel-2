@@ -78,12 +78,12 @@ public class CTM {
             {  6,  7,  3,  2 }, //  5 - ║
             { 12, 13,  9,  8 }, //  6 - ═
             { 18, 13, 11,  2 }, //  7 - ╚  with inside corner
-            {  6, 15,  3, 16 }, //  8 - ╔  with inside corner
+            {  6, 15,  9, 16 }, //  8 - ╔  with inside corner
             { 14,  7, 17,  8 }, //  9 - ╗  with inside corner
             { 12, 19,  3, 10 }, // 10 - ╝  with inside corner
 
             { 18, 13,  1,  2 }, // 11 - ╚  no inside corner
-            {  6,  5,  3, 16 }, // 12 - ╔  no inside corner
+            {  6,  5,  9, 16 }, // 12 - ╔  no inside corner
             {  4,  7, 17,  8 }, // 13 - ╗  no inside corner
             { 12, 19,  3,  0 }, // 14 - ╝  no inside corner
 
@@ -139,7 +139,6 @@ public class CTM {
 		if (world == null)
 			return 0;
 
-		int texture = 0;
 		Block block = world.getBlock(x, y, z);
 		int blockMetadata = world.getBlockMetadata(x, y, z);
 
@@ -157,45 +156,105 @@ public class CTM {
          */
         if (side == 0) {
             //TODO:
-            b[0] = isConnected(world, x - 1, y, z, side, block, blockMetadata);
-            b[1] = isConnected(world, x + 1, y, z, side, block, blockMetadata);
-            b[2] = isConnected(world, x, y, z + 1, side, block, blockMetadata);
-            b[3] = isConnected(world, x, y, z - 1, side, block, blockMetadata);
+            b[0] = isConnected(world, x - 1, y, z - 1, side, block, blockMetadata);
+            b[1] = isConnected(world, x, y, z - 1, side, block, blockMetadata);
+            b[2] = isConnected(world, x + 1, y, z - 1, side, block, blockMetadata);
+            b[3] = isConnected(world, x - 1, y, z, side, block, blockMetadata);
+            b[4] = isConnected(world, x + 1, y, z, side, block, blockMetadata);
+            b[5] = isConnected(world, x - 1, y, z + 1, side, block, blockMetadata);
+            b[6] = isConnected(world, x, y, z + 1, side, block, blockMetadata);
+            b[7] = isConnected(world, x + 1, y, z + 1, side, block, blockMetadata);
         } else if (side == 1) {
             //TODO:
-			b[0] = isConnected(world, x - 1, y, z, side, block, blockMetadata);
-			b[1] = isConnected(world, x + 1, y, z, side, block, blockMetadata);
-			b[2] = isConnected(world, x, y, z - 1, side, block, blockMetadata);
-			b[3] = isConnected(world, x, y, z + 1, side, block, blockMetadata);
+            b[0] = isConnected(world, x - 1, y, z + 1, side, block, blockMetadata);
+            b[1] = isConnected(world, x, y, z + 1, side, block, blockMetadata);
+            b[2] = isConnected(world, x + 1, y, z + 1, side, block, blockMetadata);
+            b[3] = isConnected(world, x - 1, y, z, side, block, blockMetadata);
+            b[4] = isConnected(world, x + 1, y, z, side, block, blockMetadata);
+            b[5] = isConnected(world, x - 1, y, z - 1, side, block, blockMetadata);
+            b[6] = isConnected(world, x, y, z - 1, side, block, blockMetadata);
+            b[7] = isConnected(world, x + 1, y, z - 1, side, block, blockMetadata);
 		} else if (side == 2) {
             //TODO:
-			b[0] = isConnected(world, x + 1, y, z, side, block, blockMetadata);
-			b[1] = isConnected(world, x - 1, y, z, side, block, blockMetadata);
-			b[2] = isConnected(world, x, y - 1, z, side, block, blockMetadata);
-			b[3] = isConnected(world, x, y + 1, z, side, block, blockMetadata);
+			b[0] = isConnected(world, x + 1, y + 1, z, side, block, blockMetadata);
+			b[1] = isConnected(world, x, y + 1, z, side, block, blockMetadata);
+			b[2] = isConnected(world, x - 1, y + 1, z, side, block, blockMetadata);
+			b[3] = isConnected(world, x + 1, y, z, side, block, blockMetadata);
+            b[4] = isConnected(world, x - 1, y, z, side, block, blockMetadata);
+            b[5] = isConnected(world, x + 1, y - 1, z, side, block, blockMetadata);
+            b[6] = isConnected(world, x, y - 1, z, side, block, blockMetadata);
+            b[7] = isConnected(world, x - 1, y - 1, z, side, block, blockMetadata);
 		} else if (side == 3) {
             //TODO:
-			b[0] = isConnected(world, x - 1, y, z, side, block, blockMetadata);
-			b[1] = isConnected(world, x + 1, y, z, side, block, blockMetadata);
-			b[2] = isConnected(world, x, y - 1, z, side, block, blockMetadata);
-			b[3] = isConnected(world, x, y + 1, z, side, block, blockMetadata);
+            b[0] = isConnected(world, x - 1, y + 1, z, side, block, blockMetadata);
+            b[1] = isConnected(world, x, y + 1, z, side, block, blockMetadata);
+            b[2] = isConnected(world, x + 1, y + 1, z, side, block, blockMetadata);
+            b[3] = isConnected(world, x - 1, y, z, side, block, blockMetadata);
+            b[4] = isConnected(world, x + 1, y, z, side, block, blockMetadata);
+            b[5] = isConnected(world, x - 1, y - 1, z, side, block, blockMetadata);
+            b[6] = isConnected(world, x, y - 1, z, side, block, blockMetadata);
+            b[7] = isConnected(world, x + 1, y - 1, z, side, block, blockMetadata);
 		} else if (side == 4) {
             //TODO:
-			b[0] = isConnected(world, x, y, z - 1, side, block, blockMetadata);
-			b[1] = isConnected(world, x, y, z + 1, side, block, blockMetadata);
-			b[2] = isConnected(world, x, y - 1, z, side, block, blockMetadata);
-			b[3] = isConnected(world, x, y + 1, z, side, block, blockMetadata);
+			b[0] = isConnected(world, x, y + 1, z - 1, side, block, blockMetadata);
+			b[1] = isConnected(world, x, y + 1, z, side, block, blockMetadata);
+			b[2] = isConnected(world, x, y + 1, z + 1, side, block, blockMetadata);
+			b[3] = isConnected(world, x, y, z - 1, side, block, blockMetadata);
+            b[4] = isConnected(world, x, y, z + 1, side, block, blockMetadata);
+            b[5] = isConnected(world, x, y - 1, z - 1, side, block, blockMetadata);
+            b[6] = isConnected(world, x, y - 1, z, side, block, blockMetadata);
+            b[7] = isConnected(world, x, y - 1, z + 1, side, block, blockMetadata);
 		} else if (side == 5) {
             //TODO:
-			b[0] = isConnected(world, x, y, z + 1, side, block, blockMetadata);
-			b[1] = isConnected(world, x, y, z - 1, side, block, blockMetadata);
-			b[2] = isConnected(world, x, y - 1, z, side, block, blockMetadata);
-			b[3] = isConnected(world, x, y + 1, z, side, block, blockMetadata);
+            b[0] = isConnected(world, x, y + 1, z + 1, side, block, blockMetadata);
+            b[1] = isConnected(world, x, y + 1, z, side, block, blockMetadata);
+            b[2] = isConnected(world, x, y + 1, z - 1, side, block, blockMetadata);
+            b[3] = isConnected(world, x, y, z + 1, side, block, blockMetadata);
+            b[4] = isConnected(world, x, y, z - 1, side, block, blockMetadata);
+            b[5] = isConnected(world, x, y - 1, z + 1, side, block, blockMetadata);
+            b[6] = isConnected(world, x, y - 1, z, side, block, blockMetadata);
+            b[7] = isConnected(world, x, y - 1, z - 1, side, block, blockMetadata);
 		}
 
-        //TODO: return something other than zero
+        int numConnectedSides = (b[1] ? 1 : 0) + (b[4] ? 1 : 0) + (b[6] ? 1 : 0) + (b[3] ? 1 : 0);
 
-		return texture;
+        if (numConnectedSides == 1) {
+            if (b[1]) {
+                return 1;
+            } else if (b[4]) {
+                return 2;
+            } else if (b[6]) {
+                return 3;
+            } else if (b[3]) {
+                return 4;
+            }
+        }
+
+        if (numConnectedSides == 2) {
+            if (b[1] && b[6]) {
+                return 5;
+            } else if (b[4] && b[3]) {
+                return 6;
+            } else if (b[1] && b[4]) {
+                return b[2] ? 11 : 7;
+            } else if (b[4] && b[6]) {
+                return b[7] ? 12 : 8;
+            } else if (b[6] && b[3]) {
+                return b[5] ? 13 : 9;
+            } else if (b[3] && b[1]) {
+                return b[0] ? 14 : 10;
+            }
+        }
+
+        if (numConnectedSides == 3) {
+
+        }
+
+        if (numConnectedSides == 3) {
+
+        }
+
+        return 0;
 	}
 
 	public static boolean isConnected(IBlockAccess world, int x, int y, int z, int side, Block block, int meta) {
