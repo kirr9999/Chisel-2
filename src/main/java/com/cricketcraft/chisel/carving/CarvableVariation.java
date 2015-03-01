@@ -4,42 +4,41 @@ import net.minecraft.block.Block;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.IIcon;
 
-import com.cricketcraft.chisel.carving.CarvableHelper.TextureType;
 import com.cricketcraft.chisel.client.render.TextureSubmap;
 
 public class CarvableVariation {
 
-	public String blockName;
-	public String descriptionUnloc;
-	public int metadata;
-	public TextureType type = TextureType.NORMAL;
+    public String blockName;
+    public String descriptionUnloc;
+    public int metadata;
+    public int kind;
 
-	public Block block;
-	public int blockMeta;
+    public Block block;
+    public int blockMeta;
 
-	public String texture;
+    public String texture;
 
-	public IIcon icon;
-	public IIcon iconBot;
-	public IIcon iconTop;
+    public IIcon icon;
+    public IIcon iconTop;
+    public IIcon iconBot;
 
-	public CarvableVariationCTM ctm;
-	public TextureSubmap seamsCtmVert;
-	public TextureSubmap variations9;
+    public CarvableVariationCTM ctm;
+    public TextureSubmap seamsCtmVert;
+    public TextureSubmap variations9;
 
-	public TextureSubmap submap;
-	public TextureSubmap submapSmall;
+    public TextureSubmap submap;
+    public TextureSubmap submapSmall;
 
-	public String getDescription() {
-		return I18n.format(descriptionUnloc);
-	}
+    public String getDescription() {
+        return I18n.format(descriptionUnloc);
+    }
 
-	public void setDescriptionUnloc(String desc) {
-		this.descriptionUnloc = desc;
-	}
+    public void setDescriptionUnloc(String desc) {
+        this.descriptionUnloc = desc;
+    }
 
-	static class CarvableVariationCTM {
+    static class CarvableVariationCTM {
 
-		TextureSubmap seams[] = new TextureSubmap[3];
-	}
+        TextureSubmap seams[] = new TextureSubmap[3];
+    }
 }

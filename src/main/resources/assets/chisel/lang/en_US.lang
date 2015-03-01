@@ -9,6 +9,7 @@ item.chisel.chisel.desc.lc2=Can target a block by leaving it in the inventory
 item.chisel.chisel.desc.modes=Has multiple modes for chiseling.
 
 item.chisel.chisel_diamond.name=Diamond Chisel
+item.chisel.chisel_obsidian.name=Obsidian Chisel
 
 item.ballMoss.name=Ball O' Moss
 item.ballMoss.desc=Right-Click to throw. This will turn Cobblestone to Moss Stone on impact.
@@ -77,6 +78,7 @@ autochisel.slot.chisel.tooltip=Chisel Slot
 autochisel.slot.target.tooltip=Target Slot
 
 #Leaves
+tile.chisel.leaves.name=Leaf
 tile.leaves.6.desc=Dead Leaves
 tile.leaves.7.desc=Fancy Leaves
 tile.leaves.8.desc=Pink Petals
@@ -224,6 +226,8 @@ tile.grimstone.14.desc=Flaky Grimstone
 
 #Technical Block
 tile.chisel.technical.name=Technical Block
+tile.chisel.technical2.name=Transparent Technical Block
+tile.chisel.technical3.name=Industrial Technical Block
 tile.technical.0.desc=Scaffold
 tile.technical.1.desc=Panels with Caution Tape
 tile.technical.2.desc=An Old Relic from the land of Oneteufyv
@@ -240,7 +244,8 @@ tile.technical.12.desc=Rusty Panel
 tile.technical.13.desc=Grate
 tile.technical.14.desc=Fan (Malfunctioning)
 tile.technical.15.desc=Rusty Grate
-tile.chisel.technical2.name=Transparent Technical Block
+tile.technical3.0.desc=I'm a big fan of this massive fan!
+tile.technical3.1.desc=Industrial Armor Plating
 
 #Metal Blocks
 tile.chisel.aluminumblock.name=Block of Aluminum
@@ -595,7 +600,7 @@ tile.concrete.9.desc=Partly Weathered Concrete Block
 tile.concrete.10.desc=Asphalt
 
 #Road Line
-tile.chisel.roadLine.name=Road Lines
+tile.chisel.road_line.name=Road Lines
 tile.roadLine.0.desc=White
 tile.roadLine.1.desc=Yellow
 tile.roadLine.2.desc=Double White
@@ -734,6 +739,10 @@ tile.stoneMoss.15.desc=Mossy Cobblestone with Dark Panel
 
 #Stone Bricks
 tile.chisel.stonebricksmooth.name=Stone Bricks
+tile.stonebricksmooth.0.desc=Modern Neutral Masonry
+tile.stonebricksmooth.1.desc=Modern Felsic Masonry
+tile.stonebricksmooth.2.desc=Modern Mafic Masonry
+tile.stonebricksmooth.3.desc=Modern Mixed Masonry
 tile.stonebricksmooth.4.desc=Small Stone Bricks
 tile.stonebricksmooth.5.desc=Wide Stone Bricks
 tile.stonebricksmooth.6.desc=Small Disordered Stone Bricks

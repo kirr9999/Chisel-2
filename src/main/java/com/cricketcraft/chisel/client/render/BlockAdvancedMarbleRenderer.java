@@ -9,7 +9,6 @@ import org.lwjgl.opengl.GL11;
 import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.api.ICarvable;
 import com.cricketcraft.chisel.carving.CarvableHelper;
-import com.cricketcraft.chisel.carving.CarvableHelper.TextureType;
 import com.cricketcraft.chisel.carving.CarvableVariation;
 import com.cricketcraft.chisel.utils.Drawing;
 
@@ -18,70 +17,70 @@ import cpw.mods.fml.client.registry.RenderingRegistry;
 
 public class BlockAdvancedMarbleRenderer implements ISimpleBlockRenderingHandler {
 
-	public RenderBlocksCTM rendererCTM = new RenderBlocksCTM();
-	RenderBlocksColumn rendererColumn = new RenderBlocksColumn();
+    public RenderBlocksCTM rendererCTM = new RenderBlocksCTM();
+    RenderBlocksColumn rendererColumn = new RenderBlocksColumn();
 
-	public BlockAdvancedMarbleRenderer() {
-		if (Chisel.renderCTMId == 0) {
-			Chisel.renderCTMId = RenderingRegistry.getNextAvailableRenderId();
-		}
-	}
+    public BlockAdvancedMarbleRenderer() {
+        if (Chisel.renderCTMId == 0) {
+            Chisel.renderCTMId = RenderingRegistry.getNextAvailableRenderId();
+        }
+    }
 
-	@Override
-	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
-		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
-		Drawing.drawBlock(block, metadata, renderer);
-		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
-	}
+    @Override
+    public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
+        GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
+        Drawing.drawBlock(block, metadata, renderer);
+        GL11.glTranslatef(0.5F, 0.5F, 0.5F);
+    }
 
-	@Override
-	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks rendererOld) {
-		int meta = world.getBlockMetadata(x, y, z);
+    @Override
+    public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks rendererOld) {
+        int meta = world.getBlockMetadata(x, y, z);
 
-		CarvableVariation var = ((ICarvable) block).getVariation(world, x, y, z, meta);
-		
-		if (rendererOld.hasOverrideBlockTexture()) {
-			// breaking anim
-			rendererOld.renderStandardBlock(block, x, y, z);
-			return true;
-		}
+        CarvableVariation var = ((ICarvable) block).getVariation(world, x, y, z, meta);
 
-		switch (var == null ? TextureType.NORMAL : var.type) {
-		case CTMX:
-			rendererCTM.blockAccess = world;
-			rendererCTM.renderMaxX = 1.0;
-			rendererCTM.renderMaxY = 1.0;
-			rendererCTM.renderMaxZ = 1.0;
+        if (rendererOld.hasOverrideBlockTexture()) {
+            // breaking anim
+            rendererOld.renderStandardBlock(block, x, y, z);
+            return true;
+        }
 
-			rendererCTM.submap = var.submap;
-			rendererCTM.submapSmall = var.submapSmall;
+        switch (var == null ? 0 : var.kind) {
+            case CarvableHelper.CTMX:
+                rendererCTM.blockAccess = world;
+                rendererCTM.renderMaxX = 1.0;
+                rendererCTM.renderMaxY = 1.0;
+                rendererCTM.renderMaxZ = 1.0;
 
-			rendererCTM.rendererOld = rendererOld;
+                rendererCTM.submap = var.submap;
+                rendererCTM.submapSmall = var.submapSmall;
 
-			return rendererCTM.renderStandardBlock(block, x, y, z);
-		case CTMV:
-			rendererColumn.blockAccess = world;
-			rendererColumn.renderMaxX = 1.0;
-			rendererColumn.renderMaxY = 1.0;
-			rendererColumn.renderMaxZ = 1.0;
+                rendererCTM.rendererOld = rendererOld;
 
-			rendererColumn.submap = var.seamsCtmVert;
-			rendererColumn.iconTop = var.iconTop;
+                return rendererCTM.renderStandardBlock(block, x, y, z);
+            case CarvableHelper.CTMV:
+                rendererColumn.blockAccess = world;
+                rendererColumn.renderMaxX = 1.0;
+                rendererColumn.renderMaxY = 1.0;
+                rendererColumn.renderMaxZ = 1.0;
 
-			return rendererColumn.renderStandardBlock(block, x, y, z);
-		default:
-			return rendererOld.renderStandardBlock(block, x, y, z);
-		}
-	}
+                rendererColumn.submap = var.seamsCtmVert;
+                rendererColumn.iconTop = var.iconTop;
 
-	@Override
-	public boolean shouldRender3DInInventory(int renderId) {
-		return true;
-	}
+                return rendererColumn.renderStandardBlock(block, x, y, z);
+            default:
+                return rendererOld.renderStandardBlock(block, x, y, z);
+        }
+    }
 
-	@Override
-	public int getRenderId() {
-		return Chisel.renderCTMId;
-	}
+    @Override
+    public boolean shouldRender3DInInventory(int renderId) {
+        return true;
+    }
+
+    @Override
+    public int getRenderId() {
+        return Chisel.renderCTMId;
+    }
 
 }

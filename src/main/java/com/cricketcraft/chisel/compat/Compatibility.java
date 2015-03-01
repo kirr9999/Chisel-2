@@ -1,8 +1,14 @@
 package com.cricketcraft.chisel.compat;
 
 import net.minecraft.block.Block;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
+import thaumcraft.api.ThaumcraftApi;
+import thaumcraft.api.aspects.Aspect;
+import thaumcraft.api.aspects.AspectList;
 
 import com.cricketcraft.chisel.carving.Carving;
+import com.cricketcraft.chisel.init.ChiselBlocks;
 
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -16,6 +22,7 @@ public class Compatibility {
 
 		/* Proj Red */
 		addSupport("ProjRed|Exploration", "projectred.exploration.stone", "marble", 0, 99);
+		addSupport("ProjRed|Exploration", "projectred.exploration.stone", "marble", 1, 99);
 
 		/* Bluepower */
 		addSupport("bluepower", "marble", "marble", 0, 99);
@@ -44,6 +51,11 @@ public class Compatibility {
 		addSupport("PFAAGeologica", "mediumStoneBrickStairs.limestone", "limestoneStairs", 0, 99);
 		addSupport("PFAAGeologica", "strongStoneBrick", "stoneBrick", 3, 99);
 		addSupport("PFAAGeologica", "strongCobble", "cobblestone", 3, 99);
+
+		/* Thaumcraft TODO There is probably a cleaner way of doing this */
+		if (Loader.isModLoaded("Thaumcraft")) {
+			loadThaumcraftAspects();
+		}
 	}
 
 	public static void addSupport(String modname, String blockname, String name, int metadata, int order) {
@@ -54,5 +66,10 @@ public class Compatibility {
 
 	public static void addSupport(String name, Block block, int metadata, int order) {
 		Carving.chisel.addVariation(name, block, metadata, order);
+	}
+
+	private static void loadThaumcraftAspects() {
+		ThaumcraftApi.registerObjectTag(new ItemStack(ChiselBlocks.cobblestone, 1, OreDictionary.WILDCARD_VALUE), (new AspectList()).add(Aspect.ENTROPY, 1).add(Aspect.EARTH, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(ChiselBlocks.cobblestoneWall, 1, OreDictionary.WILDCARD_VALUE), (new AspectList()).add(Aspect.ENTROPY, 1).add(Aspect.EARTH, 1));
 	}
 }
