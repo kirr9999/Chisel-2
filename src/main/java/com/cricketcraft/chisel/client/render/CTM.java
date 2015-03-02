@@ -1,5 +1,6 @@
 package com.cricketcraft.chisel.client.render;
 
+import com.cricketcraft.chisel.config.Configurations;
 import net.minecraft.block.Block;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -292,7 +293,7 @@ public class CTM {
 		}
 		
 		// check that we aren't already connected outwards from this side
-		ret &= !(obscuring.equals(block) && getBlockOrFacadeMetadata(world, x2, y2, z2, side) == meta);
+		ret &= !(obscuring.equals(block) && getBlockOrFacadeMetadata(world, x2, y2, z2, side) == meta && Configurations.connectInsideCTM);
 		
 		return ret;
 	}
