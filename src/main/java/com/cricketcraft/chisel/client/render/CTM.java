@@ -173,16 +173,16 @@ public class CTM {
             b[5] = isConnected(world, x - 1, y, z + 1, side, block, blockMetadata);
             b[6] = isConnected(world, x, y, z + 1, side, block, blockMetadata);
             b[7] = isConnected(world, x + 1, y, z + 1, side, block, blockMetadata);
-		} else if (side == 2) {
-			b[0] = isConnected(world, x + 1, y + 1, z, side, block, blockMetadata);
-			b[1] = isConnected(world, x, y + 1, z, side, block, blockMetadata);
-			b[2] = isConnected(world, x - 1, y + 1, z, side, block, blockMetadata);
-			b[3] = isConnected(world, x + 1, y, z, side, block, blockMetadata);
+        } else if (side == 2) {
+            b[0] = isConnected(world, x + 1, y + 1, z, side, block, blockMetadata);
+            b[1] = isConnected(world, x, y + 1, z, side, block, blockMetadata);
+            b[2] = isConnected(world, x - 1, y + 1, z, side, block, blockMetadata);
+            b[3] = isConnected(world, x + 1, y, z, side, block, blockMetadata);
             b[4] = isConnected(world, x - 1, y, z, side, block, blockMetadata);
             b[5] = isConnected(world, x + 1, y - 1, z, side, block, blockMetadata);
             b[6] = isConnected(world, x, y - 1, z, side, block, blockMetadata);
             b[7] = isConnected(world, x - 1, y - 1, z, side, block, blockMetadata);
-		} else if (side == 3) {
+        } else if (side == 3) {
             b[0] = isConnected(world, x - 1, y + 1, z, side, block, blockMetadata);
             b[1] = isConnected(world, x, y + 1, z, side, block, blockMetadata);
             b[2] = isConnected(world, x + 1, y + 1, z, side, block, blockMetadata);
@@ -191,16 +191,16 @@ public class CTM {
             b[5] = isConnected(world, x - 1, y - 1, z, side, block, blockMetadata);
             b[6] = isConnected(world, x, y - 1, z, side, block, blockMetadata);
             b[7] = isConnected(world, x + 1, y - 1, z, side, block, blockMetadata);
-		} else if (side == 4) {
-			b[0] = isConnected(world, x, y + 1, z - 1, side, block, blockMetadata);
-			b[1] = isConnected(world, x, y + 1, z, side, block, blockMetadata);
-			b[2] = isConnected(world, x, y + 1, z + 1, side, block, blockMetadata);
-			b[3] = isConnected(world, x, y, z - 1, side, block, blockMetadata);
+        } else if (side == 4) {
+            b[0] = isConnected(world, x, y + 1, z - 1, side, block, blockMetadata);
+            b[1] = isConnected(world, x, y + 1, z, side, block, blockMetadata);
+            b[2] = isConnected(world, x, y + 1, z + 1, side, block, blockMetadata);
+            b[3] = isConnected(world, x, y, z - 1, side, block, blockMetadata);
             b[4] = isConnected(world, x, y, z + 1, side, block, blockMetadata);
             b[5] = isConnected(world, x, y - 1, z - 1, side, block, blockMetadata);
             b[6] = isConnected(world, x, y - 1, z, side, block, blockMetadata);
             b[7] = isConnected(world, x, y - 1, z + 1, side, block, blockMetadata);
-		} else if (side == 5) {
+        } else if (side == 5) {
             b[0] = isConnected(world, x, y + 1, z + 1, side, block, blockMetadata);
             b[1] = isConnected(world, x, y + 1, z, side, block, blockMetadata);
             b[2] = isConnected(world, x, y + 1, z - 1, side, block, blockMetadata);
@@ -209,7 +209,7 @@ public class CTM {
             b[5] = isConnected(world, x, y - 1, z + 1, side, block, blockMetadata);
             b[6] = isConnected(world, x, y - 1, z, side, block, blockMetadata);
             b[7] = isConnected(world, x, y - 1, z - 1, side, block, blockMetadata);
-		}
+        }
 
         int numConnectedSides = (b[1] ? 1 : 0) + (b[4] ? 1 : 0) + (b[6] ? 1 : 0) + (b[3] ? 1 : 0);
 
