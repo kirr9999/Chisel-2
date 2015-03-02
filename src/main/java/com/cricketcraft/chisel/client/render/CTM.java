@@ -81,7 +81,6 @@ public class CTM {
             {  6, 15,  9, 16 }, //  8 - ╔  with inside corner
             { 14,  7, 17,  8 }, //  9 - ╗  with inside corner
             { 12, 19,  3, 10 }, // 10 - ╝  with inside corner
-
             { 18, 13,  1,  2 }, // 11 - ╚  no inside corner
             {  6,  5,  9, 16 }, // 12 - ╔  no inside corner
             {  4,  7, 17,  8 }, // 13 - ╗  no inside corner
@@ -91,17 +90,14 @@ public class CTM {
             { 14, 15,  9,  8 }, // 16 - ╦  with inside corners
             { 14,  7,  3, 10 }, // 17 - ╣  with inside corners
             { 12, 13, 11, 10 }, // 18 - ╩  with inside corners
-
             {  6,  5, 11,  2 }, // 23 - ╠  with top right inside corner
             {  4, 15,  9,  8 }, // 24 - ╦  with bottom right inside corner
             { 14,  7,  3,  0 }, // 25 - ╣  with bottom left inside corner
             { 12, 13,  1, 10 }, // 26 - ╩  with top left inside corner
-
             {  6, 15,  1,  2 }, // 19 - ╠  with bottom right inside corner
             { 14,  5,  9,  8 }, // 20 - ╦  with bottom left inside corner
             {  4,  7,  3, 10 }, // 21 - ╣  with top left inside corner
             { 12, 13, 11,  0 }, // 22 - ╩  with top right inside corner
-
             {  6,  5,  1,  2 }, // 27 - ╠  no inside corners
             {  4,  5,  9,  8 }, // 28 - ╦  no inside corners
             {  4,  7,  3,  0 }, // 29 - ╣  no inside corners
@@ -211,8 +207,10 @@ public class CTM {
             b[7] = isConnected(world, x, y - 1, z - 1, side, block, blockMetadata);
         }
 
+        // Count the numbder of connected sides, and handle each case separately.
         int numConnectedSides = (b[1] ? 1 : 0) + (b[4] ? 1 : 0) + (b[6] ? 1 : 0) + (b[3] ? 1 : 0);
 
+        // Easiest to think about, find the face we're connected to, and map it to the right submap
         if (numConnectedSides == 1) {
             if (b[1]) {
                 return 1;
@@ -225,22 +223,27 @@ public class CTM {
             }
         }
 
+        // A bit more complicated, and we use the fact that the submaps without the inside corner are separated by 4
+        // in the submap array.
         if (numConnectedSides == 2) {
             if (b[1] && b[6]) {
                 return 5;
             } else if (b[4] && b[3]) {
                 return 6;
             } else if (b[1] && b[4]) {
-                return 7 + (b[2] ? 4 : 0);
+                return 7 + (b[2] ? 4 : 0); // if we are NOT supposed to have the corner, increment submap by 4
             } else if (b[4] && b[6]) {
-                return 8 + (b[7] ? 4 : 0);
+                return 8 + (b[7] ? 4 : 0); // same thing
             } else if (b[6] && b[3]) {
-                return 9 + (b[5] ? 4 : 0);
+                return 9 + (b[5] ? 4 : 0); // ...
             } else if (b[3] && b[1]) {
-                return 10 + (b[0] ? 4 : 0);
+                return 10 + (b[0] ? 4 : 0);// stop reading this
             }
         }
 
+        // For 3-way logic, there is a similar trick happening in the 2-way logic.  except the array was patterened so
+        // that we can add 4 to remove one corner, we can add 8 to remove the OTHER corner, or we can add 4 and 8
+        // together (12) to remove both corners!
         if (numConnectedSides == 3) {
             if (b[1] && b[4] && b[6]) {
                 return 15 + (b[7] ? 4 : 0) + (b[2] ? 8 : 0);
@@ -253,10 +256,15 @@ public class CTM {
             }
         }
 
+        // This is pure wizardry.  The 4-way CTM submaps are organized with their corresponding corners in a binary
+        // counting fashion.  All this line has to do, is look to see if the corner is available, and if it is,
+        // then add either 1, 2, 4, or 8.  These values can be added together to get any corner combination
+        // It's pure madness I tell you!
         if (numConnectedSides == 4) {
             return 31 + (b[5] ? 1 : 0) + (b[7] ? 2 : 0) + (b[2] ? 4 : 0) + (b[0] ? 8 : 0);
         }
 
+        // Default case, render as a normal block, no connections.
         return 0;
 	}
 
