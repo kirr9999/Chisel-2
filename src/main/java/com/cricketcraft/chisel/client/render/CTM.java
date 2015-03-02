@@ -107,26 +107,27 @@ public class CTM {
             {  4,  7,  3,  0 }, // 29 - ╣  no inside corners
             { 12, 13,  1,  0 }, // 30 - ╩  no inside corners
 
-            { 14, 15, 11, 10 }, // 31 - ╬, with all inside corners
-
-            { 14,  5, 11, 10 }, // 32 - ╬, with all but bottom right inside corner
-            {  4, 15, 11, 10 }, // 33 - ╬, with all but bottom left inside corner
-            { 14, 15, 11,  0 }, // 34 - ╬, with all but top left inside corner
-            { 14, 15,  1, 10 }, // 35 - ╬, with all but top right inside corner
-
-            {  4,  5, 11, 10 }, // 36 - ╬, with top inside corners
-            {  4, 15, 11,  0 }, // 37 - ╬, with right inside corners
-            { 14, 15,  1,  0 }, // 38 - ╬, with right inside corners
-            { 14,  5,  1, 10 }, // 39 - ╬, with left inside corners
-            {  4, 15,  1, 10 }, // 40 - ╬, with top left and bottom right inside corners
-            { 14,  5, 11,  0 }, // 41 - ╬, with top right and bottom left inside corners
-
-            {  4,  5,  1, 10 }, // 42 - ╬, with top left inside corner
-            {  4,  5, 11,  0 }, // 43 - ╬, with top right inside corner
-            {  4, 15,  1,  0 }, // 44 - ╬, with bottom right inside corner
-            { 14,  5,  1,  0 }, // 45 - ╬, with bottom left inside corner
-
-            {  4,  5,  1,  0 }, // 46 - ╬, no inside corners
+            // We're counting in binary here...
+            //        Top Left  Top Right  Bottom Right  Bottom Left
+            //           │           │           │            │
+            //           │           └──────┐ ┌──┘            │
+            //           └────────────────┐ │ │ ┌─────────────┘
+            { 14, 15, 11, 10 }, // 31 - ╬ 0 0 0 0
+            {  4, 15, 11, 10 }, // 32 - ╬ 0 0 0 1
+            { 14,  5, 11, 10 }, // 33 - ╬ 0 0 1 0
+            {  4,  5, 11, 10 }, // 34 - ╬ 0 0 1 1
+            { 14, 15,  1, 10 }, // 35 - ╬ 0 1 0 0
+            {  4, 15,  1, 10 }, // 36 - ╬ 0 1 0 1
+            { 14,  5,  1, 10 }, // 37 - ╬ 0 1 1 0
+            {  4,  5,  1, 10 }, // 38 - ╬ 0 1 1 1
+            { 14, 15, 11,  0 }, // 39 - ╬ 1 0 0 0
+            {  4, 15, 11,  0 }, // 40 - ╬ 1 0 0 1
+            { 14,  5, 11,  0 }, // 41 - ╬ 1 0 1 0
+            {  4,  5, 11,  0 }, // 42 - ╬ 1 0 1 1
+            { 14, 15,  1,  0 }, // 43 - ╬ 1 1 0 0
+            {  4, 15,  1,  0 }, // 44 - ╬ 1 1 0 1
+            { 14,  5,  1,  0 }, // 45 - ╬ 1 1 1 0
+            {  4,  5,  1,  0 }, // 46 - ╬ 1 1 1 1
     };
 
 	public static int[] getSubmapIndices(IBlockAccess world, int x, int y, int z, int side) {
@@ -155,7 +156,6 @@ public class CTM {
          * b[5]    b[6]    b[7]
          */
         if (side == 0) {
-            //TODO:
             b[0] = isConnected(world, x - 1, y, z + 1, side, block, blockMetadata);
             b[1] = isConnected(world, x, y, z + 1, side, block, blockMetadata);
             b[2] = isConnected(world, x + 1, y, z + 1, side, block, blockMetadata);
@@ -165,7 +165,6 @@ public class CTM {
             b[6] = isConnected(world, x, y, z - 1, side, block, blockMetadata);
             b[7] = isConnected(world, x + 1, y, z - 1, side, block, blockMetadata);
         } else if (side == 1) {
-            //TODO:
             b[0] = isConnected(world, x - 1, y, z - 1, side, block, blockMetadata);
             b[1] = isConnected(world, x, y, z - 1, side, block, blockMetadata);
             b[2] = isConnected(world, x + 1, y, z - 1, side, block, blockMetadata);
@@ -175,7 +174,6 @@ public class CTM {
             b[6] = isConnected(world, x, y, z + 1, side, block, blockMetadata);
             b[7] = isConnected(world, x + 1, y, z + 1, side, block, blockMetadata);
 		} else if (side == 2) {
-            //TODO:
 			b[0] = isConnected(world, x + 1, y + 1, z, side, block, blockMetadata);
 			b[1] = isConnected(world, x, y + 1, z, side, block, blockMetadata);
 			b[2] = isConnected(world, x - 1, y + 1, z, side, block, blockMetadata);
@@ -185,7 +183,6 @@ public class CTM {
             b[6] = isConnected(world, x, y - 1, z, side, block, blockMetadata);
             b[7] = isConnected(world, x - 1, y - 1, z, side, block, blockMetadata);
 		} else if (side == 3) {
-            //TODO:
             b[0] = isConnected(world, x - 1, y + 1, z, side, block, blockMetadata);
             b[1] = isConnected(world, x, y + 1, z, side, block, blockMetadata);
             b[2] = isConnected(world, x + 1, y + 1, z, side, block, blockMetadata);
@@ -195,7 +192,6 @@ public class CTM {
             b[6] = isConnected(world, x, y - 1, z, side, block, blockMetadata);
             b[7] = isConnected(world, x + 1, y - 1, z, side, block, blockMetadata);
 		} else if (side == 4) {
-            //TODO:
 			b[0] = isConnected(world, x, y + 1, z - 1, side, block, blockMetadata);
 			b[1] = isConnected(world, x, y + 1, z, side, block, blockMetadata);
 			b[2] = isConnected(world, x, y + 1, z + 1, side, block, blockMetadata);
@@ -205,7 +201,6 @@ public class CTM {
             b[6] = isConnected(world, x, y - 1, z, side, block, blockMetadata);
             b[7] = isConnected(world, x, y - 1, z + 1, side, block, blockMetadata);
 		} else if (side == 5) {
-            //TODO:
             b[0] = isConnected(world, x, y + 1, z + 1, side, block, blockMetadata);
             b[1] = isConnected(world, x, y + 1, z, side, block, blockMetadata);
             b[2] = isConnected(world, x, y + 1, z - 1, side, block, blockMetadata);
@@ -236,22 +231,30 @@ public class CTM {
             } else if (b[4] && b[3]) {
                 return 6;
             } else if (b[1] && b[4]) {
-                return b[2] ? 11 : 7;
+                return 7 + (b[2] ? 4 : 0);
             } else if (b[4] && b[6]) {
-                return b[7] ? 12 : 8;
+                return 8 + (b[7] ? 4 : 0);
             } else if (b[6] && b[3]) {
-                return b[5] ? 13 : 9;
+                return 9 + (b[5] ? 4 : 0);
             } else if (b[3] && b[1]) {
-                return b[0] ? 14 : 10;
+                return 10 + (b[0] ? 4 : 0);
             }
         }
 
         if (numConnectedSides == 3) {
-
+            if (b[1] && b[4] && b[6]) {
+                return 15 + (b[7] ? 4 : 0) + (b[2] ? 8 : 0);
+            } else if (b[4] && b[6] && b[3]) {
+                return 16 + (b[5] ? 4 : 0) + (b[7] ? 8 : 0);
+            } else if (b[6] && b[3] && b[1]) {
+                return 17 + (b[0] ? 4 : 0) + (b[5] ? 8 : 0);
+            } else if (b[3] && b[1] && b[4]) {
+                return 18 + (b[2] ? 4 : 0) + (b[0] ? 8 : 0);
+            }
         }
 
-        if (numConnectedSides == 3) {
-
+        if (numConnectedSides == 4) {
+            return 31 + (b[5] ? 1 : 0) + (b[7] ? 2 : 0) + (b[2] ? 4 : 0) + (b[0] ? 8 : 0);
         }
 
         return 0;
