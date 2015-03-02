@@ -13,9 +13,9 @@ public class RenderBlocksCTM extends RenderBlocks {
 
 	/**
 	 * An enum for all possible 26 sub-side vertices.
-	 * <p/>
+	 * 
 	 * The naming scheme is as follows:
-	 * <p/>
+	 * 
 	 * ZERO and ONE are special cases, they are the absolute min and absolute max of the block.
 	 * X, Y, Z, or any combination means that the axes listed in the name are at 1.
 	 * X, Y, Z, or any combination followed by HALF means that those axes are at 0.5.
@@ -70,7 +70,7 @@ public class RenderBlocksCTM extends RenderBlocks {
 
 	/**
 	 * Each side is divided into 4 sub-sides. LB(left bottom), RB(right bottom), LT(right top), and RT(right top).
-	 * <p/>
+	 * 
 	 * Each sub-side contains 4 {@link Vert} objects representing its position on the block.
 	 */
 	enum SubSide {

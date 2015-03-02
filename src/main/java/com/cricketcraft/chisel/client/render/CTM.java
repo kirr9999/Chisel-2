@@ -12,7 +12,7 @@ import com.cricketcraft.chisel.api.IFacade;
  * textures.  The normal Texture.png is the blocks "unconnected" texture, and is used when CTM is disabled or the block
  * has nothing to connect to.  This texture has all of the outside corner quadrants  The texture-ctm.png contains the
  * rest of the quadrants.
- * <p/>
+ * 
  * ┌─────────────────┐ ┌────────────────────────────────┐
  * │ texture.png     │ │ texture-ctm.png                │
  * │ ╔══════╤══════╗ │ │  ──────┼────── ║ ─────┼───── ║ │
@@ -23,16 +23,16 @@ import com.cricketcraft.chisel.api.IFacade;
  * │ ║ 18   │ 19   ║ │ │ │ 4    │ 5    │║ 6    │ 7    ║ │
  * │ ╚══════╧══════╝ │ │  ──────┼────── ║ ─────┼───── ║ │
  * └─────────────────┘ │ ═══════╤═══════╝ ─────┼───── ╚ │
- * │ │      │      ││      │      │ │
- * │ │ 8    │ 9    ││ 10   │ 11   │ │
- * │ ┼──────┼──────┼┼──────┼──────┼ │
- * │ │      │      ││      │      │ │
- * │ │ 12   │ 13   ││ 14   │ 15   │ │
- * │ ═══════╧═══════╗ ─────┼───── ╔ │
- * └────────────────────────────────┘
- * <p/>
+ *                     │ │      │      ││      │      │ │
+ *                     │ │ 8    │ 9    ││ 10   │ 11   │ │
+ *                     │ ┼──────┼──────┼┼──────┼──────┼ │
+ *                     │ │      │      ││      │      │ │
+ *                     │ │ 12   │ 13   ││ 14   │ 15   │ │
+ *                     │ ═══════╧═══════╗ ─────┼───── ╔ │
+ *                     └────────────────────────────────┘
+ * 
  * combining { 18, 13,  9, 16 }, we can generate a texture connected to the right!
- * <p/>
+ * 
  * ╔══════╤═══════
  * ║      │      │
  * ║ 16   │ 9    │
@@ -40,10 +40,10 @@ import com.cricketcraft.chisel.api.IFacade;
  * ║      │      │
  * ║ 18   │ 13   │
  * ╚══════╧═══════
- * <p/>
- * <p/>
+ * 
+ * 
  * combining { 18, 13, 11,  2 }, we can generate a texture, in the shape of an L (connected to the right, and up
- * <p/>
+ * 
  * ║ ─────┼───── ╚
  * ║      │      │
  * ║ 2    │ 11   │
@@ -51,12 +51,10 @@ import com.cricketcraft.chisel.api.IFacade;
  * ║      │      │
  * ║ 18   │ 13   │
  * ╚══════╧═══════
- * <p/>
- * <p/>
+ * 
+ * 
  * HAVE FUN!
  * -CptRageToaster-
- * <p/>
- * TODO: Everything
  */
 
 public class CTM {
@@ -70,38 +68,38 @@ public class CTM {
 	 */
 	static int submaps[][] = { { 18, 19, 17, 16 }, //  0 - No connection, with border
 
-			{ 18, 19, 3, 2 }, //  1 - Connected from above
-			{ 18, 13, 9, 16 }, //  2 - Connected to the right
-			{ 6, 7, 17, 16 }, //  3 - Connected from below
-			{ 12, 19, 17, 8 }, //  4 - Connected to the left
+			{ 18, 19,  3,  2 }, //  1 - Connected from above
+			{ 18, 13,  9, 16 }, //  2 - Connected to the right
+			{  6,  7, 17, 16 }, //  3 - Connected from below
+			{ 12, 19, 17,  8 }, //  4 - Connected to the left
 
-			{ 6, 7, 3, 2 }, //  5 - ║
-			{ 12, 13, 9, 8 }, //  6 - ═
-			{ 18, 13, 11, 2 }, //  7 - ╚  with inside corner
-			{ 6, 15, 9, 16 }, //  8 - ╔  with inside corner
-			{ 14, 7, 17, 8 }, //  9 - ╗  with inside corner
-			{ 12, 19, 3, 10 }, // 10 - ╝  with inside corner
-			{ 18, 13, 1, 2 }, // 11 - ╚  no inside corner
-			{ 6, 5, 9, 16 }, // 12 - ╔  no inside corner
-			{ 4, 7, 17, 8 }, // 13 - ╗  no inside corner
-			{ 12, 19, 3, 0 }, // 14 - ╝  no inside corner
+			{  6,  7,  3,  2 }, //  5 - ║
+			{ 12, 13,  9,  8 }, //  6 - ═
+			{ 18, 13, 11,  2 }, //  7 - ╚  with inside corner
+			{  6, 15,  9, 16 }, //  8 - ╔  with inside corner
+			{ 14,  7, 17,  8 }, //  9 - ╗  with inside corner
+			{ 12, 19,  3, 10 }, // 10 - ╝  with inside corner
+			{ 18, 13,  1,  2 }, // 11 - ╚  no inside corner
+			{  6,  5,  9, 16 }, // 12 - ╔  no inside corner
+			{  4,  7, 17,  8 }, // 13 - ╗  no inside corner
+			{ 12, 19,  3,  0 }, // 14 - ╝  no inside corner
 
-			{ 6, 15, 11, 2 }, // 15 - ╠  with inside corners
-			{ 14, 15, 9, 8 }, // 16 - ╦  with inside corners
-			{ 14, 7, 3, 10 }, // 17 - ╣  with inside corners
+			{  6, 15, 11,  2 }, // 15 - ╠  with inside corners
+			{ 14, 15,  9,  8 }, // 16 - ╦  with inside corners
+			{ 14,  7,  3, 10 }, // 17 - ╣  with inside corners
 			{ 12, 13, 11, 10 }, // 18 - ╩  with inside corners
-			{ 6, 5, 11, 2 }, // 23 - ╠  with top right inside corner
-			{ 4, 15, 9, 8 }, // 24 - ╦  with bottom right inside corner
-			{ 14, 7, 3, 0 }, // 25 - ╣  with bottom left inside corner
-			{ 12, 13, 1, 10 }, // 26 - ╩  with top left inside corner
-			{ 6, 15, 1, 2 }, // 19 - ╠  with bottom right inside corner
-			{ 14, 5, 9, 8 }, // 20 - ╦  with bottom left inside corner
-			{ 4, 7, 3, 10 }, // 21 - ╣  with top left inside corner
-			{ 12, 13, 11, 0 }, // 22 - ╩  with top right inside corner
-			{ 6, 5, 1, 2 }, // 27 - ╠  no inside corners
-			{ 4, 5, 9, 8 }, // 28 - ╦  no inside corners
-			{ 4, 7, 3, 0 }, // 29 - ╣  no inside corners
-			{ 12, 13, 1, 0 }, // 30 - ╩  no inside corners
+			{  6,  5, 11,  2 }, // 23 - ╠  with top right inside corner
+			{  4, 15,  9,  8 }, // 24 - ╦  with bottom right inside corner
+			{ 14,  7,  3,  0 }, // 25 - ╣  with bottom left inside corner
+			{ 12, 13,  1, 10 }, // 26 - ╩  with top left inside corner
+			{  6, 15,  1,  2 }, // 19 - ╠  with bottom right inside corner
+			{ 14,  5,  9,  8 }, // 20 - ╦  with bottom left inside corner
+			{  4,  7,  3, 10 }, // 21 - ╣  with top left inside corner
+			{ 12, 13, 11,  0 }, // 22 - ╩  with top right inside corner
+			{  6,  5,  1,  2 }, // 27 - ╠  no inside corners
+			{  4,  5,  9,  8 }, // 28 - ╦  no inside corners
+			{  4,  7,  3,  0 }, // 29 - ╣  no inside corners
+			{ 12, 13,  1,  0 }, // 30 - ╩  no inside corners
 
 			// We're counting in binary here...
 			//        Top Left  Top Right  Bottom Right  Bottom Left
@@ -109,21 +107,21 @@ public class CTM {
 			//           │           └──────┐ ┌──┘            │
 			//           └────────────────┐ │ │ ┌─────────────┘
 			{ 14, 15, 11, 10 }, // 31 - ╬ 0 0 0 0
-			{ 4, 15, 11, 10 }, // 32 - ╬ 0 0 0 1
-			{ 14, 5, 11, 10 }, // 33 - ╬ 0 0 1 0
-			{ 4, 5, 11, 10 }, // 34 - ╬ 0 0 1 1
-			{ 14, 15, 1, 10 }, // 35 - ╬ 0 1 0 0
-			{ 4, 15, 1, 10 }, // 36 - ╬ 0 1 0 1
-			{ 14, 5, 1, 10 }, // 37 - ╬ 0 1 1 0
-			{ 4, 5, 1, 10 }, // 38 - ╬ 0 1 1 1
-			{ 14, 15, 11, 0 }, // 39 - ╬ 1 0 0 0
-			{ 4, 15, 11, 0 }, // 40 - ╬ 1 0 0 1
-			{ 14, 5, 11, 0 }, // 41 - ╬ 1 0 1 0
-			{ 4, 5, 11, 0 }, // 42 - ╬ 1 0 1 1
-			{ 14, 15, 1, 0 }, // 43 - ╬ 1 1 0 0
-			{ 4, 15, 1, 0 }, // 44 - ╬ 1 1 0 1
-			{ 14, 5, 1, 0 }, // 45 - ╬ 1 1 1 0
-			{ 4, 5, 1, 0 }, // 46 - ╬ 1 1 1 1
+			{  4, 15, 11, 10 }, // 32 - ╬ 0 0 0 1
+			{ 14,  5, 11, 10 }, // 33 - ╬ 0 0 1 0
+			{  4,  5, 11, 10 }, // 34 - ╬ 0 0 1 1
+			{ 14, 15,  1, 10 }, // 35 - ╬ 0 1 0 0
+			{  4, 15,  1, 10 }, // 36 - ╬ 0 1 0 1
+			{ 14,  5,  1, 10 }, // 37 - ╬ 0 1 1 0
+			{  4,  5,  1, 10 }, // 38 - ╬ 0 1 1 1
+			{ 14, 15, 11,  0 }, // 39 - ╬ 1 0 0 0
+			{  4, 15, 11,  0 }, // 40 - ╬ 1 0 0 1
+			{ 14,  5, 11,  0 }, // 41 - ╬ 1 0 1 0
+			{  4,  5, 11,  0 }, // 42 - ╬ 1 0 1 1
+			{ 14, 15,  1,  0 }, // 43 - ╬ 1 1 0 0
+			{  4, 15,  1,  0 }, // 44 - ╬ 1 1 0 1
+			{ 14,  5,  1,  0 }, // 45 - ╬ 1 1 1 0
+			{  4,  5,  1,  0 }, // 46 - ╬ 1 1 1 1
 	};
 
 	public static int[] getSubmapIndices(IBlockAccess world, int x, int y, int z, int side) {
