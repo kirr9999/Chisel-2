@@ -58,81 +58,9 @@ import com.cricketcraft.chisel.api.IFacade;
  */
 
 public class CTM {
-
-	/**
-	 * The quads are ordered the same here, and in the renderer:
-	 * 1. Lower left
-	 * 2. Lower Right
-	 * 3. Top Right
-	 * 4. Top Left
-	 */
-	static int submaps[][] = { { 18, 19, 17, 16 }, //  0 - No connection, with border
-
-			{ 18, 19,  3,  2 }, //  1 - Connected from above
-			{ 18, 13,  9, 16 }, //  2 - Connected to the right
-			{  6,  7, 17, 16 }, //  3 - Connected from below
-			{ 12, 19, 17,  8 }, //  4 - Connected to the left
-
-			{  6,  7,  3,  2 }, //  5 - ║
-			{ 12, 13,  9,  8 }, //  6 - ═
-			{ 18, 13, 11,  2 }, //  7 - ╚  with inside corner
-			{  6, 15,  9, 16 }, //  8 - ╔  with inside corner
-			{ 14,  7, 17,  8 }, //  9 - ╗  with inside corner
-			{ 12, 19,  3, 10 }, // 10 - ╝  with inside corner
-			{ 18, 13,  1,  2 }, // 11 - ╚  no inside corner
-			{  6,  5,  9, 16 }, // 12 - ╔  no inside corner
-			{  4,  7, 17,  8 }, // 13 - ╗  no inside corner
-			{ 12, 19,  3,  0 }, // 14 - ╝  no inside corner
-
-			{  6, 15, 11,  2 }, // 15 - ╠  with inside corners
-			{ 14, 15,  9,  8 }, // 16 - ╦  with inside corners
-			{ 14,  7,  3, 10 }, // 17 - ╣  with inside corners
-			{ 12, 13, 11, 10 }, // 18 - ╩  with inside corners
-			{  6,  5, 11,  2 }, // 23 - ╠  with top right inside corner
-			{  4, 15,  9,  8 }, // 24 - ╦  with bottom right inside corner
-			{ 14,  7,  3,  0 }, // 25 - ╣  with bottom left inside corner
-			{ 12, 13,  1, 10 }, // 26 - ╩  with top left inside corner
-			{  6, 15,  1,  2 }, // 19 - ╠  with bottom right inside corner
-			{ 14,  5,  9,  8 }, // 20 - ╦  with bottom left inside corner
-			{  4,  7,  3, 10 }, // 21 - ╣  with top left inside corner
-			{ 12, 13, 11,  0 }, // 22 - ╩  with top right inside corner
-			{  6,  5,  1,  2 }, // 27 - ╠  no inside corners
-			{  4,  5,  9,  8 }, // 28 - ╦  no inside corners
-			{  4,  7,  3,  0 }, // 29 - ╣  no inside corners
-			{ 12, 13,  1,  0 }, // 30 - ╩  no inside corners
-
-			// We're counting in binary here...
-			//        Top Left  Top Right  Bottom Right  Bottom Left
-			//           │           │           │            │
-			//           │           └──────┐ ┌──┘            │
-			//           └────────────────┐ │ │ ┌─────────────┘
-			{ 14, 15, 11, 10 }, // 31 - ╬ 0 0 0 0
-			{  4, 15, 11, 10 }, // 32 - ╬ 0 0 0 1
-			{ 14,  5, 11, 10 }, // 33 - ╬ 0 0 1 0
-			{  4,  5, 11, 10 }, // 34 - ╬ 0 0 1 1
-			{ 14, 15,  1, 10 }, // 35 - ╬ 0 1 0 0
-			{  4, 15,  1, 10 }, // 36 - ╬ 0 1 0 1
-			{ 14,  5,  1, 10 }, // 37 - ╬ 0 1 1 0
-			{  4,  5,  1, 10 }, // 38 - ╬ 0 1 1 1
-			{ 14, 15, 11,  0 }, // 39 - ╬ 1 0 0 0
-			{  4, 15, 11,  0 }, // 40 - ╬ 1 0 0 1
-			{ 14,  5, 11,  0 }, // 41 - ╬ 1 0 1 0
-			{  4,  5, 11,  0 }, // 42 - ╬ 1 0 1 1
-			{ 14, 15,  1,  0 }, // 43 - ╬ 1 1 0 0
-			{  4, 15,  1,  0 }, // 44 - ╬ 1 1 0 1
-			{ 14,  5,  1,  0 }, // 45 - ╬ 1 1 1 0
-			{  4,  5,  1,  0 }, // 46 - ╬ 1 1 1 1
-	};
-
 	public static int[] getSubmapIndices(IBlockAccess world, int x, int y, int z, int side) {
-		int index = getTexture(world, x, y, z, side);
-
-		return submaps[index];
-	}
-
-	public static int getTexture(IBlockAccess world, int x, int y, int z, int side) {
 		if (world == null)
-			return 0;
+			return new int[] { 18, 19, 17, 16 };
 
 		Block block = world.getBlock(x, y, z);
 		int blockMetadata = world.getBlockMetadata(x, y, z);
@@ -205,65 +133,33 @@ public class CTM {
 			b[7] = isConnected(world, x, y - 1, z - 1, side, block, blockMetadata);
 		}
 
-		// Count the numbder of connected sides, and handle each case separately.
-		int numConnectedSides = (b[1] ? 1 : 0) + (b[4] ? 1 : 0) + (b[6] ? 1 : 0) + (b[3] ? 1 : 0);
+		int[] ret = new int[] { 18, 19, 17, 16 };
 
-		// Easiest to think about, find the face we're connected to, and map it to the right submap
-		if (numConnectedSides == 1) {
-			if (b[1]) {
-				return 1;
-			} else if (b[4]) {
-				return 2;
-			} else if (b[6]) {
-				return 3;
-			} else if (b[3]) {
-				return 4;
-			}
+		// Bottom Left
+		if (b[3] || b[6]) {
+			ret[0] = 4 + (b[6] ? 2 : 0) + (b[3] ? 8 : 0);
+			if (b[3] && b[5] && b[6]) ret[0] = 4;
 		}
 
-		// A bit more complicated, and we use the fact that the submaps without the inside corner are separated by 4
-		// in the submap array.
-		if (numConnectedSides == 2) {
-			if (b[1] && b[6]) {
-				return 5;
-			} else if (b[4] && b[3]) {
-				return 6;
-			} else if (b[1] && b[4]) {
-				return 7 + (b[2] ? 4 : 0); // if we are NOT supposed to have the corner, increment submap by 4
-			} else if (b[4] && b[6]) {
-				return 8 + (b[7] ? 4 : 0); // same thing
-			} else if (b[6] && b[3]) {
-				return 9 + (b[5] ? 4 : 0); // ...
-			} else if (b[3] && b[1]) {
-				return 10 + (b[0] ? 4 : 0);// stop reading this
-			}
+		// Bottom Right
+		if (b[6] || b[4]) {
+			ret[1] = 5 + (b[6] ? 2 : 0) + (b[4] ? 8 : 0);
+			if (b[4] && b[6] && b[7]) ret[1] = 5;
 		}
 
-		// For 3-way logic, there is a similar trick happening in the 2-way logic.  except the array was patterened so
-		// that we can add 4 to remove one corner, we can add 8 to remove the OTHER corner, or we can add 4 and 8
-		// together (12) to remove both corners!
-		if (numConnectedSides == 3) {
-			if (b[1] && b[4] && b[6]) {
-				return 15 + (b[7] ? 4 : 0) + (b[2] ? 8 : 0);
-			} else if (b[4] && b[6] && b[3]) {
-				return 16 + (b[5] ? 4 : 0) + (b[7] ? 8 : 0);
-			} else if (b[6] && b[3] && b[1]) {
-				return 17 + (b[0] ? 4 : 0) + (b[5] ? 8 : 0);
-			} else if (b[3] && b[1] && b[4]) {
-				return 18 + (b[2] ? 4 : 0) + (b[0] ? 8 : 0);
-			}
+		// Top Right
+		if (b[4] || b[1]) {
+			ret[2] = 1 + (b[1] ? 2 : 0) + (b[4] ? 8 : 0);
+			if (b[1] && b[2] && b[4]) ret[2] = 1;
 		}
 
-		// This is pure wizardry.  The 4-way CTM submaps are organized with their corresponding corners in a binary
-		// counting fashion.  All this line has to do, is look to see if the corner is available, and if it is,
-		// then add either 1, 2, 4, or 8.  These values can be added together to get any corner combination
-		// It's pure madness I tell you!
-		if (numConnectedSides == 4) {
-			return 31 + (b[5] ? 1 : 0) + (b[7] ? 2 : 0) + (b[2] ? 4 : 0) + (b[0] ? 8 : 0);
+		// Top Left
+		if (b[1] || b[3]) {
+			ret[3] = (b[1] ? 2 : 0) + (b[3] ? 8 : 0);
+			if (b[0] && b[1] && b[3]) ret[3] = 0;
 		}
 
-		// Default case, render as a normal block, no connections.
-		return 0;
+		return ret;
 	}
 
 	public static boolean isConnected(IBlockAccess world, int x, int y, int z, int side, Block block, int meta) {

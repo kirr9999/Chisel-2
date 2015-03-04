@@ -208,12 +208,14 @@ public class CarvableHelper {
             case TOPBOTSIDE:
                 return getIcon(side, metadata);
             case CTM3:
-                int tex = CTM.getTexture(world, x, y, z, side);
+				/* TODO:
+                int tex = CTM.getSubmapIndices(world, x, y, z, side);
 
                 int row = tex / 16;
                 int col = tex % 16;
 
                 return variation.ctm.seams[col / 4].icons[col % 4 + row * 4];
+                */
             case CTMV: {
                 if (side < 2)
                     return variation.iconTop;
