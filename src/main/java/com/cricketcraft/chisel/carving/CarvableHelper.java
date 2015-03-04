@@ -216,6 +216,7 @@ public class CarvableHelper {
 
                 return variation.ctm.seams[col / 4].icons[col % 4 + row * 4];
                 */
+				return variation.ctm.seams[0].icons[0];
             case CTMV: {
                 if (side < 2)
                     return variation.iconTop;
