@@ -2,24 +2,32 @@ package com.cricketcraft.chisel;
 
 import java.io.File;
 
-import com.cricketcraft.chisel.entity.EntityChiselSnowman;
-
-import cpw.mods.fml.common.registry.EntityRegistry;
 import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ChatComponentText;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.cricketcraft.chisel.api.ChiselAPIProps;
+import com.cricketcraft.chisel.api.Statistics;
+import com.cricketcraft.chisel.api.carving.CarvableHelper;
 import com.cricketcraft.chisel.block.BlockCarvable;
+import com.cricketcraft.chisel.carving.Carving;
 import com.cricketcraft.chisel.compat.Compatibility;
 import com.cricketcraft.chisel.compat.IMCHandler;
 import com.cricketcraft.chisel.compat.fmp.FMPCompat;
 import com.cricketcraft.chisel.config.Configurations;
+import com.cricketcraft.chisel.entity.EntityChiselSnowman;
 import com.cricketcraft.chisel.init.ChiselBlocks;
 import com.cricketcraft.chisel.init.ChiselTabs;
+import com.cricketcraft.chisel.item.ItemCarvable;
 import com.cricketcraft.chisel.item.chisel.ChiselController;
 import com.cricketcraft.chisel.network.ChiselGuiHandler;
 import com.cricketcraft.chisel.network.PacketHandler;
@@ -45,10 +53,11 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.GameRegistry.Type;
 
-@Mod(modid = Chisel.MOD_ID, name = Chisel.MOD_NAME, version = Chisel.VERSION, guiFactory = "com.cricketcraft.chisel.client.gui.GuiFactory", dependencies = "after:ForgeMultipart;after:Thaumcraft;after:appliedenergistics2;after:Railcraft;after:AWWayofTime;after:TwilightForest")
+@Mod(modid = Chisel.MOD_ID, name = Chisel.MOD_NAME, version = Chisel.VERSION, guiFactory = "com.cricketcraft.chisel.client.gui.GuiFactory", dependencies = "after:EE3;after:ForgeMultipart;after:Thaumcraft;after:appliedenergistics2;after:Railcraft;after:AWWayofTime;after:TwilightForest")
 public class Chisel {
 
 	public static final String MOD_ID = "chisel";
@@ -59,9 +68,6 @@ public class Chisel {
 	public static final BlockCarvable.SoundType soundMetalFootstep = new BlockCarvable.SoundType("metal", 1.0f, 1.0f);
 	public static boolean multipartLoaded = false;
 	public static int renderEldritchId;
-	public static int renderCTMId;
-	public static int renderCTMNoLightId;
-	public static int renderCarpetId;
 	public static int renderAutoChiselId;
 	public static int renderGlowId;
 	public static int renderLayeredId;
@@ -71,6 +77,12 @@ public class Chisel {
 
 	@Instance(MOD_ID)
 	public static Chisel instance;
+	
+	public Chisel() { 
+		ChiselAPIProps.MOD_ID = MOD_ID;
+		CarvableHelper.itemCarvableClass = ItemCarvable.class;
+		Carving.construct();
+	}
 
 	@SidedProxy(clientSide = "com.cricketcraft.chisel.proxy.ClientProxy", serverSide = "com.cricketcraft.chisel.proxy.CommonProxy")
 	public static CommonProxy proxy;
@@ -123,6 +135,7 @@ public class Chisel {
 
 		ChiselTabs.preInit();
 		Features.preInit();
+		Statistics.init();
 		PacketHandler.init();
 		ChiselController.INSTANCE.preInit();
 		if (Loader.isModLoaded("ForgeMultipart")) {
@@ -169,6 +182,8 @@ public class Chisel {
 	public void postInit(FMLPostInitializationEvent event) {
 		ChiselTabs.postInit();
 		Compatibility.init(event);
+		FMLLog.severe("Unable to lookup chisel:... is not an error, please do not treat it as such");
+		FMLLog.bigWarning("In case you didn't see the red above I suggest you read it - Cricket");
 	}
 
 	@EventHandler

@@ -1,10 +1,11 @@
 package com.cricketcraft.chisel.block;
 
+import com.cricketcraft.chisel.init.ChiselTabs;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 
-import com.cricketcraft.chisel.carving.CarvableHelper;
-import com.cricketcraft.chisel.carving.CarvableVariation;
+import com.cricketcraft.chisel.api.carving.CarvableHelper;
+import com.cricketcraft.chisel.api.carving.IVariationInfo;
 import com.cricketcraft.chisel.item.ItemCarvable;
 
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -17,7 +18,7 @@ public class CarvableStairsMaker {
 	String blockName;
 
 	public CarvableStairsMaker(Block base) {
-		carverHelper = new CarvableHelper();
+		carverHelper = new CarvableHelper(base);
 		blockBase = base;
 	}
 
@@ -30,13 +31,13 @@ public class CarvableStairsMaker {
 			String n = name + "." + i;
 			blocks[i] = creator == null ? new BlockCarvableStairs(blockBase, i * 2, carverHelper) : creator.create(blockBase, i * 2, carverHelper);
 
-			blocks[i].setBlockName("chisel." + n);
+			blocks[i].setBlockName("chisel." + n).setCreativeTab(ChiselTabs.tabStairChiselBlocks);
 			GameRegistry.registerBlock(blocks[i], ItemCarvable.class, n);
 
-			for (int meta = 0; meta < 2 && i * 2 + meta < carverHelper.variations.size(); meta++) {
-				CarvableVariation variation = carverHelper.variations.get(i * 2 + meta);
+			for (int meta = 0; meta < 2 && i * 2 + meta < carverHelper.infoList.size(); meta++) {
+				IVariationInfo info = carverHelper.infoList.get(i * 2 + meta);
 
-				carverHelper.registerVariation(name, variation, blocks[i], meta * 8);
+				carverHelper.registerVariation(name, info);
 
 				GameRegistry.addRecipe(new ItemStack(blocks[i], 4, meta * 8), "*  ", "** ", "***", '*', new ItemStack(blockBase, 1, i * 2 + meta));
 			}

@@ -2,8 +2,11 @@ package com.cricketcraft.chisel.config;
 
 import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.Features;
+import com.cricketcraft.ctmlib.CTM;
+
 import net.minecraft.item.ItemDye;
 import net.minecraftforge.common.config.Configuration;
+
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Locale;
@@ -33,8 +36,9 @@ public class Configurations {
 	public static int particlesTickrate;
 	public static boolean oldPillars;
 	public static boolean disableCTM;
-	public static boolean fancy;
+	public static boolean connectInsideCTM;
 	public static boolean blockDescriptions;
+	public static boolean imTooGoodForDescriptions;
 
 	public static boolean allowChiselDamage;
 	public static int ironChiselMaxDamage;
@@ -53,6 +57,8 @@ public class Configurations {
 
 	public static int[] configColors = new int[ItemDye.field_150923_a.length];
 
+	public static boolean fullBlockConcrete;
+
 	public static boolean refreshConfig() {
 
 		String category;
@@ -61,6 +67,7 @@ public class Configurations {
 		category = "general";
 		concreteVelocity = config.get(category, "concreteVelocity", 0.45,
 				"Traversing concrete roads, players will acceleration to this velocity. For reference, normal running speed is about 0.28. Set to 0 to disable acceleration.").getDouble(0.45);
+		fullBlockConcrete = config.get(category, "fullBlockConcrete", false, "Should concrete be a full block. This will also unavoidably disable speed increase if set to true.").getBoolean(false);
 		ghostCloud = config.get(category, "doesCloudRenderLikeGhost", true).getBoolean(true);
 		factoryBlockAmount = config.get(category, "amountYouGetFromFactoryBlockCrafting", 32).getInt(32);
 		allowMossy = config.get(category, "allowBrickToMossyInChisel", true, "If true, you can chisel stone brick to mossy stone brick.").getBoolean(true);
@@ -84,9 +91,11 @@ public class Configurations {
 		particlesTickrate = config.get(category, "particleTickrate", 1, "Particle tick rate. Greater value = less particles.").getInt(1);
 		oldPillars = config.get(category, "pillarOldGraphics", false, "Use old pillar textures").getBoolean(false);
 		disableCTM = !config.get(category, "connectedTextures", true, "Enable connected textures").getBoolean(true);
-		fancy = config.get(category, "fancyLeaves", true, "Enable fancy textures").getBoolean(true);
+		CTM.disableObscuredFaceCheckConfig = connectInsideCTM = config.get(category, "connectInsideCTM", false,
+				"Choose whether the inside corner is disconnected on a CTM block - http://imgur.com/eUywLZ4").getBoolean(false);
 		blockDescriptions = config.get(category, "tooltipsUseBlockDescriptions", true, "Make variations of blocks have the same name, and use the description in tooltip to distinguish them.")
 				.getBoolean(true);
+		imTooGoodForDescriptions = config.get(category, "imTooGoodForBlockDescriptions", false, "For those people who just hate block descriptions on the world gen!").getBoolean();
 
 		/* chisel */
 		category = "chisel";
@@ -97,6 +106,7 @@ public class Configurations {
 		ironChiselCanLeftClick = config.get(category, "ironChiselCanLeftClick", true, "If this is true, the iron chisel can left click chisel blocks. If false, it cannot.").getBoolean();
 		ironChiselHasModes = config.get(category, "ironChiselHasModes", false, "If this is true, the iron chisel can change its chisel mode just as the diamond chisel can.").getBoolean();
 		allowChiselCrossColors = config.get(category, "allowChiselCrossColors", true, "Should someone be able to chisel something into a different color.").getBoolean();
+
 		ironChiselAttackDamage = config
 				.get(category, "ironChiselAttackDamage", 2, "The extra attack damage points (in half hearts) that the iron chisel inflicts when it is used to attack an entity.").getInt();
 		diamondChiselAttackDamage = config.get(category, "diamondChiselAttackDamage", 2,

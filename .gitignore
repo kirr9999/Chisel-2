@@ -11,6 +11,7 @@ bin
 *.ipr
 *.iws
 out
+classes
 
 #gradle
 build
@@ -24,16 +25,19 @@ run
 .DS_Store
 *.command
 
+#windows
+Thumbs.db
+
 #workspace
 saves
 asm
-config
 logs
 screenshots
 mods
-world
 lib
 libs
+#config  I assume you want to keep your minecraft config and world out
+#world   this is taken care of with the run folder up at runtime you are actually removing the packages
 
 *.txt
 *.json

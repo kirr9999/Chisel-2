@@ -12,6 +12,7 @@ public final class ChiselBlocks {
 
 	public static final Block autoChisel = null;
 	public static final BlockCarvable antiBlock = null;
+	public static final BlockCarvableBeacon beacon = null;
 	public static final BlockCarvable marble = null;
 	public static final BlockCarvable marble_pillar = null;
 	public static final BlockCarvable limestone = null;
@@ -19,7 +20,7 @@ public final class ChiselBlocks {
 	public static final BlockCarvableSlab limestone_slab = null;
 	public static final BlockCarvableSlab marble_pillar_slab = null;
 	public static final BlockCarvable cobblestone = null;
-	public static final BlockMarbleWall cobblestoneWall = null;
+	public static final BlockCarvableWall cobblestoneWall = null;
 	public static final BlockCarvableGlass glass = null;
 	public static final BlockCarvableGlass glass2 = null;
 	public static final BlockCarvablePane glass_pane = null;
@@ -33,16 +34,16 @@ public final class ChiselBlocks {
 	public static final BlockCarvableGlowstone glowstone = null;
 	public static final BlockCarvable lapis_block = null;
 	public static final BlockCarvable emerald_block = null;
-    public static final BlockCarvable nation = null;
+    public static final BlockCarvable rebel = null;
 	public static final BlockCarvable nether_brick = null;
 	public static final BlockCarvable netherrack = null;
 	public static final BlockCarvable mossy_cobblestone = null;
 	public static final BlockCarvable stonebricksmooth = null;
 	public static final BlockCarvablePane iron_bars = null;
 	public static final BlockCarvableIce ice = null;
-	public static final BlockCarvableIcePillar ice_pillar = null;
+	public static final BlockCarvableIce ice_pillar = null;
 	public static final BlockCarvablePackedIce packedice = null;
-	public static final BlockCarvablePackedIcePillar packedice_pillar = null;
+	public static final BlockCarvablePackedIce packedice_pillar = null;
 	public static final BlockCarvable obsidian = null;
 	public static final BlockCarvable obsidian2 = null;
 	public static final BlockCarvablePowered redstone_block = null;
@@ -54,7 +55,7 @@ public final class ChiselBlocks {
 	public static final BlockCarvable fantasyblock = null;
 	public static final BlockCarvable fantasyblock2 = null;
 	public static final BlockCarvable carpet_block = null;
-	public static final BlockMarbleCarpet carpet = null;
+	public static final BlockCarvableCarpet carpet = null;
 	public static final BlockCarvable bookshelf = null;
 	public static final BlockCarvable tyrian = null;
 	public static final BlockCarvable dirt = null;
@@ -69,16 +70,19 @@ public final class ChiselBlocks {
 	public static final BlockCarvable laboratoryblock = null;
 
 	public static final BlockCarvable voidstone = null;
-	public static final BlockMarbleTexturedOre voidstone2 = null;
-	public static final BlockCarvablePillar voidstonePillar = null;
-	public static final BlockCarvablePillar voidstonePillar2 = null;
+	public static final BlockCarvable voidstone2 = null;
+	public static final BlockCarvable voidstonerunic = null;
+	public static final BlockCarvable voidstonePillar = null;
+	public static final BlockCarvable voidstonePillar2 = null;
 	public static final BlockSnakestone stone_snakestone = null;
 	public static final BlockSnakestone sand_snakestone = null;
 	public static final BlockSnakestoneObsidian obsidian_snakestone = null;
 	public static final BlockCarvable hexPlating = null;
+	public static final BlockCarvable hexLargePlating = null;
 	public static final BlockCarvable technical = null;
 	public static final BlockCarvableGlass technical2 = null;
 	public static final BlockCarvable futura = null;
+	public static final BlockCarvable circuits = null;
 	public static final BlockCarvable brickCustom = null;
 	public static final BlockCarvableLayered warningSign = null;
 	public static final BlockCarvable arcane = null;
@@ -88,6 +92,7 @@ public final class ChiselBlocks {
 	public static final BlockCarvable copperblock = null;
 	public static final BlockCarvable bronzeblock = null;
 	public static final BlockCarvable aluminumblock = null;
+	public static BlockCarvableStairs[] aluminumStairs = new BlockCarvableStairs[8];
 	public static final BlockCarvable leadblock = null;
 	public static final BlockCarvable silverblock = null;
 	public static final BlockCarvable steelblock = null;
@@ -122,6 +127,9 @@ public final class ChiselBlocks {
 	public static final BlockCarvable granite = null;
 	public static final BlockCarvable diorite = null;
 	public static final BlockCarvable andesite = null;
+
+	// 1.9... drull pls
+	public static final BlockCarvable purpur = null;
 
 	private ChiselBlocks() {
 	}

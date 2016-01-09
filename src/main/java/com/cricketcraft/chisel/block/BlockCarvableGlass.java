@@ -7,14 +7,13 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 
-import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.api.ICarvable;
-import com.cricketcraft.chisel.carving.CarvableHelper;
-import com.cricketcraft.chisel.carving.CarvableVariation;
+import com.cricketcraft.chisel.api.carving.CarvableHelper;
+import com.cricketcraft.chisel.api.carving.IVariationInfo;
+import com.cricketcraft.chisel.api.rendering.ClientUtils;
 import com.cricketcraft.chisel.init.ChiselTabs;
 
 import cpw.mods.fml.relauncher.Side;
@@ -28,7 +27,7 @@ public class BlockCarvableGlass extends BlockGlass implements ICarvable {
 	public BlockCarvableGlass() {
 		super(Material.glass, false);
 
-		carverHelper = new CarvableHelper();
+		carverHelper = new CarvableHelper(this);
 		setCreativeTab(ChiselTabs.tabOtherChiselBlocks);
 	}
 
@@ -49,7 +48,7 @@ public class BlockCarvableGlass extends BlockGlass implements ICarvable {
 
 	@Override
 	public int getRenderType() {
-		return Chisel.renderCTMId;
+		return ClientUtils.renderCTMId;
 	}
 
 	@Override
@@ -73,13 +72,13 @@ public class BlockCarvableGlass extends BlockGlass implements ICarvable {
 	}
 
 	@Override
-	public CarvableVariation getVariation(IBlockAccess world, int x, int y, int z, int metadata) {
+	public IVariationInfo getManager(IBlockAccess world, int x, int y, int z, int metadata) {
 		return carverHelper.getVariation(metadata);
 	}
 
 	@Override
-	public CarvableVariation getVariation(ItemStack stack) {
-		return carverHelper.getVariation(stack.getItemDamage());
+	public IVariationInfo getManager(int meta) {
+		return carverHelper.getVariation(meta);
 	}
 
 	@Override

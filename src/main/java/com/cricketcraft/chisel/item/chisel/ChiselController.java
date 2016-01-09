@@ -23,7 +23,7 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 public final class ChiselController {
 
 	public static final ChiselController INSTANCE = new ChiselController();
-	
+
 	private long lastTickClick = 0;
 
 	private ChiselController() {
@@ -61,9 +61,9 @@ public final class ChiselController {
 			if (group == null) {
 				return;
 			}
-			
+
 			List<ICarvingVariation> list = group.getVariations();
-			
+
 			main: for (ItemStack stack : OreDictionary.getOres(group.getOreName())) {
 				ICarvingVariation v = General.getVariation(stack);
 				for (ICarvingVariation check : list) {

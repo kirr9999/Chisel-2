@@ -1,9 +1,9 @@
 package com.cricketcraft.chisel.api;
 
-import com.cricketcraft.chisel.Chisel;
-
 /**
  * Use the enum constants (using {@link #key} or calling {@link #toString()}) in this class as keys for IMC messages sent to chisel
+ * <p>
+ * It is also acceptable to copy the Strings in this class to avoid referencing this API.
  */
 public enum IMC {
 
@@ -55,5 +55,10 @@ public enum IMC {
 	/**
 	 * The modid of Chisel so you can easily send IMC to this mod.
 	 */
-	public static final String CHISEL_MODID = Chisel.MOD_ID;
+	@Deprecated
+	public static final String CHISEL_MODID = "chisel";
+
+	public static final String getModid() {
+		return ChiselAPIProps.MOD_ID;
+	}
 }

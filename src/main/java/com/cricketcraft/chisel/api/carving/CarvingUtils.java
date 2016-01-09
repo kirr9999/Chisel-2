@@ -1,8 +1,13 @@
 package com.cricketcraft.chisel.api.carving;
 
-import java.lang.reflect.Field;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
+import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
+
+import com.google.common.collect.Lists;
 
 public class CarvingUtils {
 
@@ -30,29 +35,141 @@ public class CarvingUtils {
 		return new ItemStack(variation.getBlock(), 1, variation.getItemMeta());
 	}
 
-	private static Field _chisel;
-	private static boolean errored = false;
-	private static final String CARVING_CLASS = "com.cricketcraft.chisel.carving.Carving";
+	public static ICarvingRegistry chisel;
 
 	/**
 	 * @return The instance of the chisel carving registry from the chisel mod.
 	 *         <p>
-	 *         If chisel is not installed or some other error occurs this will return null.
+	 *         If chisel is not installed this will return null.
 	 */
 	public static ICarvingRegistry getChiselRegistry() {
-		if (errored) {
-			return null;
+		return chisel;
+	}
+
+	/**
+	 * Creates a standard {@link ICarvingVariation} for the given data. Use this if you do not need any custom behavior in your own variation.
+	 * 
+	 * @param block
+	 *            The block of the variation
+	 * @param metadata
+	 *            The metadata of both the block and item
+	 * @param order
+	 *            The sorting order.
+	 * @return A standard {@link ICarvingVariation} instance.
+	 */
+	public static ICarvingVariation getDefaultVariationFor(Block block, int metadata, int order) {
+		return new SimpleCarvingVariation(block, metadata, order);
+	}
+
+	/**
+	 * Creates a standard {@link ICarvingGroup} for the given name. Use this if you do not need any custom behavior in your own group.
+	 * 
+	 * @param name
+	 *            The name of the group.
+	 * @return A standard {@link ICarvingGroup} instance.
+	 */
+	public static ICarvingGroup getDefaultGroupFor(String name) {
+		return new SimpleCarvingGroup(name);
+	}
+
+	public static class SimpleCarvingVariation implements ICarvingVariation {
+
+		private int order;
+		private Block block;
+		private int meta;
+		private int damage;
+
+		public SimpleCarvingVariation(Block block, int metadata, int order) {
+			this.order = order;
+			this.block = block;
+			this.meta = metadata;
+			this.damage = metadata;
 		}
 
-		try {
-			if (_chisel == null) {
-				_chisel = Class.forName(CARVING_CLASS).getDeclaredField("chisel");
-			}
-			return (ICarvingRegistry) _chisel.get(null);
-		} catch (Exception e) {
-			e.printStackTrace();
-			errored = true;
-			return getChiselRegistry();
+		@Override
+		public Block getBlock() {
+			return block;
+		}
+
+		@Override
+		public int getBlockMeta() {
+			return meta;
+		}
+
+		@Override
+		public int getItemMeta() {
+			return damage;
+		}
+
+		@Override
+		public int getOrder() {
+			return order;
 		}
 	}
+
+	public static class SimpleCarvingGroup implements ICarvingGroup {
+
+		private String name;
+		private String sound;
+		private String oreName;
+
+		private List<ICarvingVariation> variations = Lists.newArrayList();
+
+		public SimpleCarvingGroup(String name) {
+			this.name = name;
+		}
+
+		public List<ICarvingVariation> getVariations() {
+			return Lists.newArrayList(variations);
+		}
+
+		@Override
+		public void addVariation(ICarvingVariation variation) {
+			variations.add(variation);
+			Collections.sort(variations, new Comparator<ICarvingVariation>() {
+
+				@Override
+				public int compare(ICarvingVariation o1, ICarvingVariation o2) {
+					return CarvingUtils.compare(o1, o2);
+				}
+			});
+		}
+
+		@Override
+		public boolean removeVariation(ICarvingVariation variation) {
+			ICarvingVariation toRemove = null;
+			for (ICarvingVariation v : variations) {
+				if (v.getBlock() == variation.getBlock() && v.getBlockMeta() == variation.getBlockMeta()) {
+					toRemove = v;
+				}
+			}
+			return toRemove == null ? false : variations.remove(toRemove);
+		}
+
+		@Override
+		public String getName() {
+			return name;
+		}
+
+		@Override
+		public String getSound() {
+			return sound;
+		}
+
+		@Override
+		public void setSound(String sound) {
+			this.sound = sound;
+		}
+
+		@Override
+		public String getOreName() {
+			return oreName;
+		}
+
+		@Override
+		public void setOreName(String oreName) {
+			this.oreName = oreName;
+		}
+	}
+
 }

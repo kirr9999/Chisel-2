@@ -2,9 +2,12 @@ package com.cricketcraft.chisel.block.tileentity;
 
 import java.util.List;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -29,7 +32,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class TileEntityAutoChisel extends TileEntity implements ISidedInventory {
 
 	public enum Upgrade {
-		SPEED, AUTOMATION, STACK;
+		SPEED, AUTOMATION, STACK, REVERSION;
 
 		public String getUnlocalizedName() {
 			return ChiselItems.upgrade.getUnlocalizedName() + "_" + this.name().toLowerCase();
@@ -47,7 +50,7 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 
 	private static EntityItem ghostItem;
 	boolean equal = false;
-	private ItemStack[] inventory = new ItemStack[7];
+	private ItemStack[] inventory = new ItemStack[8];
 	private String name = "autoChisel";
 
 	// client animation fields
@@ -110,11 +113,10 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 	@Override
 	public void updateEntity() {
 
-		ItemStack base = inventory[BASE], target = inventory[TARGET], output = inventory[OUTPUT];
+		ItemStack base = inventory[BASE], target = getTarget(), output = inventory[OUTPUT];
 
 		if (!worldObj.isRemote && hasChisel() && base != null && target != null) {
 			if (canBeMadeFrom(base, target)) {
-
 				if (progress >= (hasUpgrade(Upgrade.SPEED) ? FAST_SPEED : SLOW_SPEED)) {
 
 					// reset progress
@@ -136,8 +138,9 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 						return;
 					}
 
-					// result will always be a copy of the target, of course
+					// result will always be a copy of the target
 					ItemStack chiseled = target.copy();
+
 					// if we have the stack upgrade, boost the stack size to the max possible, otherwise just one
 					chiseled.stackSize = hasUpgrade(Upgrade.STACK) ? canBeMade : 1;
 
@@ -151,7 +154,7 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 							slotChanged(OUTPUT);
 						}
 
-						chiselItem(chiseled.stackSize);
+						chiselItem(chiseled.stackSize, target);
 
 						// remove what we made from the stack
 						base.stackSize -= chiseled.stackSize;
@@ -167,11 +170,20 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 			if (chiseling) {
 				chiselRot += rotAmnt;
 				if (chiselRot >= maxRot) {
-					chiselItem(0);
+					chiselItem(0, getTarget());
 				}
 			} else {
 				chiselRot = Math.max(chiselRot - rotAmnt, 0);
 			}
+		}
+	}
+
+	private ItemStack getTarget() {
+		if (inventory[BASE] != null && hasUpgrade(Upgrade.REVERSION)) {
+			// if we have a reversion upgrade, use that for the target
+			return Carving.chisel.getItemsForChiseling(inventory[BASE]).get(0);
+		} else {
+			return inventory[TARGET];
 		}
 	}
 
@@ -191,13 +203,18 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 		if (inventory[OUTPUT] == null) {
 			return true;
 		}
+
 		// need to check NBT as well as item
-		if (toMerge.isItemEqual(inventory[OUTPUT]) && ItemStack.areItemStackTagsEqual(toMerge, inventory[OUTPUT])) {
-			// we only care about metadata if the item has subtypes
-			return !toMerge.getHasSubtypes() || toMerge.getItemDamage() == inventory[OUTPUT].getItemDamage();
+		if (!toMerge.isItemEqual(inventory[OUTPUT]) || !ItemStack.areItemStackTagsEqual(toMerge, inventory[OUTPUT])) {
+			return false;
 		}
 
-		return ((IChiselItem)inventory[CHISEL].getItem()).canChisel(worldObj, inventory[CHISEL], General.getVariation(inventory[TARGET]));
+		// we only care about metadata if the item has subtypes
+		if (toMerge.getHasSubtypes() && toMerge.getItemDamage() != inventory[OUTPUT].getItemDamage()) {
+			return false;
+		}
+
+		return ((IChiselItem) inventory[CHISEL].getItem()).canChisel(worldObj, inventory[CHISEL], General.getVariation(getTarget()));
 	}
 
 	private boolean hasChisel() {
@@ -205,10 +222,10 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 	}
 
 	/** Calls IChiselItem#onChisel() and sends the chisel packet for sound/animation */
-	private void chiselItem(int chiseled) {
+	private void chiselItem(int chiseled, ItemStack target) {
 		if (!worldObj.isRemote) {
 			boolean breakChisel = false;
-			if (((IChiselItem) inventory[CHISEL].getItem()).onChisel(worldObj, inventory[CHISEL], General.getVariation(inventory[TARGET]))) {
+			if (((IChiselItem) inventory[CHISEL].getItem()).onChisel(worldObj, inventory[CHISEL], General.getVariation(target))) {
 				inventory[CHISEL].setItemDamage(inventory[CHISEL].getItemDamage() + 1);
 				if (inventory[CHISEL].getItemDamage() >= inventory[CHISEL].getMaxDamage()) {
 					setInventorySlotContents(CHISEL, null);
@@ -327,8 +344,9 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 
 		switch (slot) {
 		case BASE:
+			return true;
 		case TARGET:
-			return !Carving.chisel.getItemsForChiseling(itemStack).isEmpty();
+			return false;
 		case OUTPUT:
 			return false;
 		case CHISEL:
@@ -368,6 +386,13 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 		if (slot == BASE && lastBase != null) {
 			ghostItem.setEntityItemStack(lastBase.copy());
 			return ghostItem;
+		} else if (slot == TARGET) {
+			ItemStack target = getTarget();
+			if (target != null) {
+				ghostItem.setEntityItemStack(target);
+				return ghostItem;
+			}
+			return null;
 		} else if (inventory[slot] == null) {
 			return null;
 		} else {

@@ -4,14 +4,13 @@ import java.util.Random;
 
 import net.minecraft.block.BlockTorch;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.item.ItemStack;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.api.ICarvable;
-import com.cricketcraft.chisel.carving.CarvableHelper;
-import com.cricketcraft.chisel.carving.CarvableVariation;
+import com.cricketcraft.chisel.api.carving.CarvableHelper;
+import com.cricketcraft.chisel.api.carving.IVariationInfo;
 import com.cricketcraft.chisel.init.ChiselTabs;
 
 import cpw.mods.fml.relauncher.Side;
@@ -26,7 +25,7 @@ public class BlockCarvableTorch extends BlockTorch implements ICarvable {
 
 	public BlockCarvableTorch(int idx, String tex) {
 		super();
-		carverHelper = new CarvableHelper();
+		carverHelper = new CarvableHelper(this);
 		setCreativeTab(ChiselTabs.tabOtherChiselBlocks);
 		setLightLevel(0.9375F);
 		setBlockName("torch");
@@ -35,13 +34,13 @@ public class BlockCarvableTorch extends BlockTorch implements ICarvable {
 	}
 
 	@Override
-	public CarvableVariation getVariation(IBlockAccess world, int x, int y, int z, int metadata) {
+	public IVariationInfo getManager(IBlockAccess world, int x, int y, int z, int metadata) {
 		return carverHelper.getVariation(metadata);
 	}
 
 	@Override
-	public CarvableVariation getVariation(ItemStack stack) {
-		return carverHelper.getVariation(stack.getItemDamage());
+	public IVariationInfo getManager(int meta) {
+		return carverHelper.getVariation(meta);
 	}
 
 	@Override

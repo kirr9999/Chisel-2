@@ -1,8 +1,7 @@
 package com.cricketcraft.chisel.inventory;
 
-import com.cricketcraft.chisel.api.IChiselItem;
-import com.cricketcraft.chisel.item.chisel.ItemChisel;
-import com.cricketcraft.chisel.utils.General;
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -10,7 +9,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
 
-import java.util.List;
+import com.cricketcraft.chisel.api.IChiselItem;
+import com.cricketcraft.chisel.item.chisel.ItemChisel;
+import com.cricketcraft.chisel.utils.General;
 
 public class InventoryChiselSelection implements IInventory {
 
@@ -106,7 +107,6 @@ public class InventoryChiselSelection implements IInventory {
 
 	public void updateItems() {
 		ItemStack chiseledItem = inventory[normalSlots];
-
 		clearItems();
 
 		if (chiseledItem == null) {
@@ -128,8 +128,10 @@ public class InventoryChiselSelection implements IInventory {
 
 		activeVariations = 0;
 		while (activeVariations < normalSlots && activeVariations < list.size()) {
-			inventory[activeVariations] = list.get(activeVariations);
-			activeVariations++;
+			if(Block.blockRegistry.getNameForObject(Block.getBlockFromItem(list.get(activeVariations).getItem())) != null) {
+				inventory[activeVariations] = list.get(activeVariations);
+				activeVariations++;
+			}
 		}
 
 		container.onChiselSlotChanged();

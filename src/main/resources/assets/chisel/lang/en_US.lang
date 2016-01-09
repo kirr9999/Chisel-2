@@ -1,9 +1,12 @@
-# Key localizations
+#Key localizations
 
-# Entity localizations
+#Stat localizations
+stat.blockChiseled=Blocks Chiseled
+
+#Entity localizations
 entity.chisel.snowman.name=Snow Golem
 
-# Item localizations
+#Item localizations
 item.chisel.chisel_iron.name=Chisel
 
 item.chisel.chisel.desc.gui=Right-Click to open GUI
@@ -23,13 +26,14 @@ item.smashingRock.desc=Right-Click to throw. This will turn Cobblestone into Gra
 item.upgrade_speed.name=Speed Upgrade
 item.upgrade_automation.name=Automation Upgrade
 item.upgrade_stack.name=Stack Upgrade
+item.upgrade_reversion.name=Reversion Upgrade
 
 item.upgrade_speed.desc=Increases the rate at which it works
 item.upgrade_automation.desc=Allows things to push in and out of the Auto Chisel
 item.upgrade_stack.desc=Allows it to manufacture stacks at a time
+item.upgrade_reversion.desc=Reverts the base slot to its original form
 
 # Block localizations
-# Have fun! ~zombiepig333
 
 #Chisel 2
 
@@ -109,9 +113,32 @@ tile.granite.6.desc=Granite Small Tiles
 tile.chisel.autoChisel.name=Auto Chisel
 autochisel.slot.chisel.tooltip=Chisel Slot
 autochisel.slot.target.tooltip=Target Slot
+autochisel.slot.speed.tooltip=Speed Upgrade
+autochisel.slot.automation.tooltip=Automation Upgrade
+autochisel.slot.stack.tooltip=Stack Upgrade
+autochisel.slot.reversion.tooltip=Reversion Upgrade
+
+#Beacon
+tile.chisel.beacon.name=Beacon
+tile.beacon.black.desc=Black Beamed Beacon
+tile.beacon.blue.desc=Blue Beamed Beacon
+tile.beacon.brown.desc=Brown Beamed Beacon
+tile.beacon.cyan.desc=Cyan Beamed Beacon
+tile.beacon.green.desc=Green Beamed Beacon
+tile.beacon.lightBlue.desc=Light Blue Beamed Beacon
+tile.beacon.silver.desc=Light Gray Beamed Beacon
+tile.beacon.lime.desc=Lime Beamed Beacon
+tile.beacon.magenta.desc=Magenta Beamed Beacon
+tile.beacon.orange.desc=Orange Beamed Beacon
+tile.beacon.pink.desc=Pink Beamed Beacon
+tile.beacon.purple.desc=Purple Beamed Beacon
+tile.beacon.red.desc=Red Beamed Beacon
+tile.beacon.white.desc=White Beamed Beacon
+tile.beacon.yellow.desc=Yellow Beamed Beacon
+tile.beacon.gray.desc=Gray Beamed Beacon
 
 #Leaves
-tile.chisel.leaves.name=Leaf
+tile.chisel.leaves.name=Leaves
 tile.leaves.6.desc=Dead Leaves
 tile.leaves.7.desc=Fancy Leaves
 tile.leaves.8.desc=Pink Petals
@@ -131,21 +158,21 @@ tile.voidstone.5.desc=Metal-Bordered Voidstone
 tile.voidstone.6.desc=Eye Voidstone
 tile.voidstone.7.desc=Beveled Voidstone
 tile.chisel.voidstoneRunic.name=Runic Voidstone
-tile.voidstoneRunic.0.desc=Voidstone - Orange Rune
-tile.voidstoneRunic.1.desc=Voidstone - Magenta Rune
-tile.voidstoneRunic.2.desc=Voidstone - Light Blue Rune
-tile.voidstoneRunic.3.desc=Voidstone - Yellow Rune
-tile.voidstoneRunic.4.desc=Voidstone - Lime Rune
-tile.voidstoneRunic.5.desc=Voidstone - Pink Rune
-tile.voidstoneRunic.6.desc=Voidstone - Gray Rune
-tile.voidstoneRunic.7.desc=Voidstone - Light Gray Rune
-tile.voidstoneRunic.8.desc=Voidstone - Cyan Rune
-tile.voidstoneRunic.9.desc=Voidstone - Purple Rune
-tile.voidstoneRunic.10.desc=Voidstone - Blue Rune
-tile.voidstoneRunic.11.desc=Voidstone - Brown Rune
-tile.voidstoneRunic.12.desc=Voidstone - Green Rune
-tile.voidstoneRunic.13.desc=Voidstone - Red Rune
-tile.voidstoneRunic.14.desc=Voidstone - Black Rune
+tile.voidstoneRunic.orange.desc=Voidstone - Orange Rune
+tile.voidstoneRunic.magenta.desc=Voidstone - Magenta Rune
+tile.voidstoneRunic.lightblue.desc=Voidstone - Light Blue Rune
+tile.voidstoneRunic.yellow.desc=Voidstone - Yellow Rune
+tile.voidstoneRunic.lime.desc=Voidstone - Lime Rune
+tile.voidstoneRunic.pink.desc=Voidstone - Pink Rune
+tile.voidstoneRunic.gray.desc=Voidstone - Gray Rune
+tile.voidstoneRunic.lightgray.desc=Voidstone - Light Gray Rune
+tile.voidstoneRunic.cyan.desc=Voidstone - Cyan Rune
+tile.voidstoneRunic.purple.desc=Voidstone - Purple Rune
+tile.voidstoneRunic.blue.desc=Voidstone - Blue Rune
+tile.voidstoneRunic.brown.desc=Voidstone - Brown Rune
+tile.voidstoneRunic.green.desc=Voidstone - Green Rune
+tile.voidstoneRunic.red.desc=Voidstone - Red Rune
+tile.voidstoneRunic.black.desc=Voidstone - Black Rune
 
 #Void Stone Pillars
 tile.chisel.voidstonePillar.name=Voidstone Pillar
@@ -224,10 +251,29 @@ tile.bloodRune.5.desc=Blood Rune Tiles
 
 #Futura
 tile.chisel.futura.name=Futura Block
+tile.chisel.futuraCircuit.name=Futura Circuit
+tile.chisel.fakeController.name=ME Controller?
 tile.futura.0.desc=Glowing Screen with Metallic Borders
 tile.futura.1.desc=Glowing Screen with Cyan Borders
 tile.futura.2.desc=Applied Labyrinthic Neon Lines
 tile.futura.3.desc=Poptart Rainbow
+tile.futura.4.desc=Purple Applied Labyrinthic Neon Lines
+tile.futuraCircuit.black.desc=Black
+tile.futuraCircuit.blue.desc=Blue
+tile.futuraCircuit.brown.desc=Brown
+tile.futuraCircuit.cyan.desc=Cyan
+tile.futuraCircuit.green.desc=Green
+tile.futuraCircuit.light_blue.desc=Light Blue
+tile.futuraCircuit.silver.desc=Light Gray
+tile.futuraCircuit.lime.desc=Lime
+tile.futuraCircuit.magenta.desc=Magenta
+tile.futuraCircuit.orange.desc=Orange
+tile.futuraCircuit.pink.desc=Pink
+tile.futuraCircuit.purple.desc=Purple
+tile.futuraCircuit.red.desc=Red
+tile.futuraCircuit.white.desc=White
+tile.futuraCircuit.yellow.desc=Yellow
+tile.futuraCircuit.gray.desc=Gray
 
 #Waterstone
 tile.chisel.waterstone.name=Waterstone
@@ -283,6 +329,7 @@ tile.grimstone.14.desc=Flaky Grimstone
 tile.chisel.technical.name=Technical Block
 tile.chisel.technical2.name=Transparent Technical Block
 tile.chisel.technical3.name=Industrial Technical Block
+tile.chisel.technical4.name=Technical Block
 tile.technical.0.desc=Scaffold
 tile.technical.1.desc=Panels with Caution Tape
 tile.technical.2.desc=An Old Relic from the land of Oneteufyv
@@ -301,6 +348,36 @@ tile.technical.14.desc=Fan (Malfunctioning)
 tile.technical.15.desc=Rusty Grate
 tile.technical3.0.desc=I'm a big fan of this massive fan!
 tile.technical3.1.desc=Industrial Armor Plating
+tile.technical4.0.desc=Corroded Metal Chunks
+tile.technical4.1.desc=Rusted Metal Chunks
+tile.technical4.2.desc=Sturdy
+tile.technical4.3.desc=MegaCell™ Battery
+tile.technical4.4.desc=Thermal Exhaust Plating
+tile.technical4.5.desc=Makeshift Plating
+tile.technical4.6.desc=Tape Drive? (I'm too young for this.)
+tile.technical4.7.desc=Pipe Dream
+
+#End Stone
+tile.chisel.end_Stone.name=End Stone
+tile.end_Stone.0.desc=End Stone Bricks
+tile.end_Stone.1.desc=End Chaotic Bricks
+tile.end_Stone.2.desc=Checkered Tiles
+tile.end_Stone.3.desc=Ender Circuit
+tile.end_Stone.4.desc=Fancy Bricks
+tile.end_Stone.5.desc=End Stone Pillar
+tile.end_Stone.6.desc=Etched End Stone
+tile.end_Stone.7.desc=Prismatic End Stone
+
+#Purpur
+tile.chisel.purpur.name=Purpur
+tile.purpur.0.desc=Medium Tiles
+tile.purpur.1.desc=Pillar
+tile.purpur.2.desc=Not Shulker
+tile.purpur.3.desc=Small Tiles
+tile.purpur.4.desc=Broken Small Tiles
+tile.purpur.5.desc=Prismatic Purpur
+tile.purpur.6.desc=Rough Bricks
+tile.purpur.7.desc=Cracked Surface
 
 #Metal Blocks
 tile.chisel.aluminumblock.name=Block of Aluminum
@@ -633,6 +710,11 @@ tile.glass2.0.desc=Asymmetrical Leaded Glass
 
 #Sandstone
 tile.chisel.sandstone.name=Sandstone
+
+tile.sandstone.0.desc=Sandstone Glyphs
+tile.sandstone.1.desc=Sandcobble
+tile.sandstone.2.desc=Sandstone Creeper
+
 tile.sandstone.3.desc=Faded Sandstone
 tile.sandstone.4.desc=Sandstone Pillar
 tile.sandstone.5.desc=Sandstone Pillar Capstone
@@ -974,8 +1056,6 @@ tile.chisel.jungle_planks.name=Jungle Wood Planks
 tile.chisel.dark_oak_planks.name=Dark Oak Wood Planks
 tile.chisel.acacia_planks.name=Acacia Wood Planks
 
-#Remember to do the descriptions.
-
 #Iron Fence
 tile.chisel.iron_bars.name=Iron Bars
 tile.iron_bars.1.desc=Iron Bars without Frame
@@ -1054,11 +1134,11 @@ tile.carpet_block.3.desc=Light Blue Carpet Block
 tile.carpet_block.4.desc=Yellow Carpet Block
 tile.carpet_block.5.desc=Light green Carpet Block
 tile.carpet_block.6.desc=Pink Carpet Block
-tile.carpet_block.7.desc=Dark grey Carpet Block
-tile.carpet_block.8.desc=Grey Carpet Block
+tile.carpet_block.7.desc=Gray Carpet Block
+tile.carpet_block.8.desc=Light Gray Carpet Block
 tile.carpet_block.9.desc=Teal Carpet Block
 tile.carpet_block.10.desc=Purple Carpet Block
-tile.carpet_block.11.desc=Dark blue Carpet Block
+tile.carpet_block.11.desc=Blue Carpet Block
 tile.carpet_block.12.desc=Brown Carpet Block
 tile.carpet_block.13.desc=Green Carpet Block
 tile.carpet_block.14.desc=Red Carpet Block
@@ -1073,11 +1153,11 @@ tile.carpet.3.desc=Light Blue Carpet
 tile.carpet.4.desc=Yellow Carpet
 tile.carpet.5.desc=Light Green Carpet
 tile.carpet.6.desc=Pink Carpet
-tile.carpet.7.desc=Dark Grey Carpet
-tile.carpet.8.desc=Grey Carpet
+tile.carpet.7.desc=Gray Carpet
+tile.carpet.8.desc=Light Gray Carpet
 tile.carpet.9.desc=Teal Carpet
 tile.carpet.10.desc=Purple Carpet
-tile.carpet.11.desc=Dark Blue Carpet
+tile.carpet.11.desc=Blue Carpet
 tile.carpet.12.desc=Brown Carpet
 tile.carpet.13.desc=Green Carpet
 tile.carpet.14.desc=Red Carpet
@@ -1255,8 +1335,8 @@ tile.woolenClay.3.desc=Light Blue Woolen Clay
 tile.woolenClay.4.desc=Yellow Woolen Clay
 tile.woolenClay.5.desc=Lime Woolen Clay
 tile.woolenClay.6.desc=Pink Woolen Clay
-tile.woolenClay.7.desc=Grey Woolen Clay
-tile.woolenClay.8.desc=Light Grey Woolen Clay
+tile.woolenClay.7.desc=Gray Woolen Clay
+tile.woolenClay.8.desc=Light Gray Woolen Clay
 tile.woolenClay.9.desc=Cyan Woolen Clay
 tile.woolenClay.10.desc=Purple Woolen Clay
 tile.woolenClay.11.desc=Blue Woolen Clay
@@ -1274,8 +1354,8 @@ tile.coloredSand.3.desc=Light Blue Colored Sand
 tile.coloredSand.4.desc=Yellow Colored Sand
 tile.coloredSand.5.desc=Lime Colored Sand
 tile.coloredSand.6.desc=Pink Colored Sand
-tile.coloredSand.7.desc=Grey Colored Sand
-tile.coloredSand.8.desc=Light Grey Colored Sand
+tile.coloredSand.7.desc=Gray Colored Sand
+tile.coloredSand.8.desc=Light Gray Colored Sand
 tile.coloredSand.9.desc=Cyan Colored Sand
 tile.coloredSand.10.desc=Purple Colored Sand
 tile.coloredSand.11.desc=Blue Colored Sand
@@ -1303,12 +1383,310 @@ tile.laboratory.13.desc=Direction Console (Right)
 tile.laboratory.14.desc=Direction Console (Left)
 tile.laboratory.15.desc=Information Console
 
+#Planks (They go in order of creative tab appearance if that helps)
+#Oak
+tile.oak.planks.1.desc=Smooth Oak Wood Planks
+tile.oak.planks.2.desc=Short Oak Wood Planks
+tile.oak.planks.6.desc=Fancy Oak Wood Plank Arrangement
+tile.oak.planks.8.desc=Oak Wood Panel
+tile.oak.planks.9.desc=Oak Wood Double Slab
+tile.oak.planks.10.desc=Oak Wood Crate
+tile.oak.planks.11.desc=Fancy Oak Wood Crate
+tile.oak.planks.13.desc=Large Long Oak Wood Planks
+tile.oak.planks.3.desc=Vertical Oak Wood Planks
+tile.oak.planks.4.desc=Vertical Uneven Oak Wood Planks
+tile.oak.planks.5.desc=Oak Wood Parquet
+tile.oak.planks.7.desc=Oak Wood Plank Blinds
+tile.oak.planks.12.desc=Oak Wood Scaffold
+tile.oak.planks.14.desc=Oak Wood Planks in Disarray
+tile.oak.planks.15.desc=Vertical Oak Wood Planks in Disarray
+
+#Spruce
+tile.spruce.planks.1.desc=Smooth Spruce Wood Planks
+tile.spruce.planks.2.desc=Short Spruce Wood Planks
+tile.spruce.planks.6.desc=Fancy Spruce Wood Plank Arrangement
+tile.spruce.planks.8.desc=Spruce Wood Panel
+tile.spruce.planks.9.desc=Spruce Wood Double Slab
+tile.spruce.planks.10.desc=Spruce Wood Crate
+tile.spruce.planks.11.desc=Fancy Spruce Wood Crate
+tile.spruce.planks.13.desc=Large Long Spruce Wood Planks
+tile.spruce.planks.3.desc=Vertical Spruce Wood Planks
+tile.spruce.planks.4.desc=Vertical Uneven Spruce Wood Planks
+tile.spruce.planks.5.desc=Spruce Wood Parquet
+tile.spruce.planks.7.desc=Spruce Wood Plank Blinds
+tile.spruce.planks.12.desc=Spruce Wood Scaffold
+tile.spruce.planks.14.desc=Spruce Wood Planks in Disarray
+tile.spruce.planks.15.desc=Vertical Spruce Wood Planks in Disarray
+
+#Birch
+tile.birch.planks.1.desc=Smooth Birch Wood Planks
+tile.birch.planks.2.desc=Short Birch Wood Planks
+tile.birch.planks.6.desc=Fancy Birch Wood Plank Arrangement
+tile.birch.planks.8.desc=Birch Wood Panel
+tile.birch.planks.9.desc=Birch Wood Double Slab
+tile.birch.planks.10.desc=Birch Wood Crate
+tile.birch.planks.11.desc=Fancy Birch Wood Crate
+tile.birch.planks.13.desc=Large Long Birch Wood Planks
+tile.birch.planks.3.desc=Vertical Birch Wood Planks
+tile.birch.planks.4.desc=Vertical Uneven Birch Wood Planks
+tile.birch.planks.5.desc=Birch Wood Parquet
+tile.birch.planks.7.desc=Birch Wood Plank Blinds
+tile.birch.planks.12.desc=Birch Wood Scaffold
+tile.birch.planks.14.desc=Birch Wood Planks in Disarray
+tile.birch.planks.15.desc=Vertical Birch Wood Planks in Disarray
+
+#Jungle
+tile.jungle.planks.1.desc=Smooth Jungle Wood Planks
+tile.jungle.planks.2.desc=Short Jungle Wood Planks
+tile.jungle.planks.6.desc=Fancy Jungle Wood Plank Arrangement
+tile.jungle.planks.8.desc=Jungle Wood Panel
+tile.jungle.planks.9.desc=Jungle Wood Double Slab
+tile.jungle.planks.10.desc=Oak Wood Crate
+tile.jungle.planks.11.desc=Fancy jungle Wood Crate
+tile.jungle.planks.13.desc=Large Long Jungle Wood Planks
+tile.jungle.planks.3.desc=Vertical Jungle Wood Planks
+tile.jungle.planks.4.desc=Vertical Uneven Jungle Wood Planks
+tile.jungle.planks.5.desc=Jungle Wood Parquet
+tile.jungle.planks.7.desc=Jungle Wood Plank Blinds
+tile.jungle.planks.12.desc=Jungle Wood Scaffold
+tile.jungle.planks.14.desc=Jungle Wood Planks in Disarray
+tile.jungle.planks.15.desc=Vertical Jungle Wood Planks in Disarray
+
+#Acacia
+tile.acacia.planks.1.desc=Smooth Acacia Wood Planks
+tile.acacia.planks.2.desc=Short Acacia Wood Planks
+tile.acacia.planks.6.desc=Fancy Acacia Wood Plank Arrangement
+tile.acacia.planks.8.desc=Acacia Wood Panel
+tile.acacia.planks.9.desc=Acacia Wood Double Slab
+tile.acacia.planks.10.desc=Acacia Wood Crate
+tile.acacia.planks.11.desc=Fancy Acacia Wood Crate
+tile.acacia.planks.13.desc=Large Long Acacia Wood Planks
+tile.acacia.planks.3.desc=Vertical Acacia Wood Planks
+tile.acacia.planks.4.desc=Vertical Uneven Acacia Wood Planks
+tile.acacia.planks.5.desc=Acacia Wood Parquet
+tile.acacia.planks.7.desc=Acacia Wood Plank Blinds
+tile.acacia.planks.12.desc=Acacia Wood Scaffold
+tile.acacia.planks.14.desc=Acacia Wood Planks in Disarray
+tile.acacia.planks.15.desc=Vertical Acacia Wood Planks in Disarray
+
+#Dark Oak
+tile.dark-oak.planks.1.desc=Smooth Dark Oak Wood Planks
+tile.dark-oak.planks.2.desc=Short Dark Oak Wood Planks
+tile.dark-oak.planks.6.desc=Fancy Dark Oak Wood Plank Arrangement
+tile.dark-oak.planks.8.desc=Dark Oak Wood Panel
+tile.dark-oak.planks.9.desc=Dark Oak Wood Double Slab
+tile.dark-oak.planks.10.desc=Dark Oak Wood Crate
+tile.dark-oak.planks.11.desc=Fancy Dark Oak Wood Crate
+tile.dark-oak.planks.13.desc=Large Long Dark Oak Wood Planks
+tile.dark-oak.planks.3.desc=Vertical Dark Oak Wood Planks
+tile.dark-oak.planks.4.desc=Vertical Uneven Dark Oak Wood Planks
+tile.dark-oak.planks.5.desc=Dark Oak Wood Parquet
+tile.dark-oak.planks.7.desc=Dark Oak Wood Plank Blinds
+tile.dark-oak.planks.12.desc=Dark Oak Wood Scaffold
+tile.dark-oak.planks.14.desc=Dark Oak Wood Planks in Disarray
+tile.dark-oak.planks.15.desc=Vertical Dark Oak Wood Planks in Disarray
+
+#Stained Glass
+white.bubble.desc=White Bubble Glass
+white.glass.desc=White Glass Panel
+white.glass.fancy.desc=White Fancy Glass Panel
+white.glass.noborder.desc=White Borderless Glass
+
+orange.bubble.desc=Orange Bubble Glass
+orange.glass.desc=Orange Glass Panel
+orange.glass.fancy.desc=Orange Fancy Glass Panel
+orange.glass.noborder.desc=Orange Borderless Glass
+
+magenta.bubble.desc=Magenta Bubble Glass
+magenta.glass.desc=Magenta Glass Panel
+magenta.glass.fancy.desc=Magenta Fancy Glass Panel
+magenta.glass.noborder.desc=Magenta Borderless Glass
+
+lightblue.bubble.desc=Light Blue Bubble Glass
+lightblue.glass.desc=Light Blue Glass Panel
+lightblue.glass.fancy.desc=Light Blue Fancy Glass Panel
+lightblue.glass.noborder.desc=Light Blue Borderless Glass
+
+yellow.bubble.desc=Yellow Bubble Glass
+yellow.glass.desc=Yellow Glass Panel
+yellow.glass.fancy.desc=Yellow Fancy Glass Panel
+yellow.glass.noborder.desc=Yellow Borderless Glass
+
+lime.bubble.desc=Lime Bubble Glass
+lime.glass.desc=Lime Glass Panel
+lime.glass.fancy.desc=Lime Fancy Glass Panel
+lime.glass.noborder.desc=Lime Borderless Glass
+
+pink.bubble.desc=Pink Bubble Glass
+pink.glass.desc=Pink Glass Panel
+pink.glass.fancy.desc=Pink Fancy Glass Panel
+pink.glass.noborder.desc=Pink Borderless Glass
+
+darkgray.bubble.desc=Gray Bubble Glass
+darkgray.glass.desc=Gray Glass Panel
+darkgray.glass.fancy.desc=Gray Fancy Glass Panel
+darkgray.glass.noborder.desc=Gray Borderless Glass
+
+lightgray.bubble.desc=Light Gray Bubble Glass
+lightgray.glass.desc=Light Gray Glass Panel
+lightgray.glass.fancy.desc=Light Gray Fancy Glass Panel
+lightgray.glass.noborder.desc=Light Gray Borderless Glass
+
+cyan.bubble.desc=Cyan Bubble Glass
+cyan.glass.desc=Cyan Glass Panel
+cyan.glass.fancy.desc=Cyan Fancy Glass Panel
+cyan.glass.noborder.desc=Cyan Borderless Glass
+
+purple.bubble.desc=Purple Bubble Glass
+purple.glass.desc=Purple Glass Panel
+purple.glass.fancy.desc=Purple Fancy Glass Panel
+purple.glass.noborder.desc=Purple Borderless Glass
+
+blue.bubble.desc=Blue Bubble Glass
+blue.glass.desc=Blue Glass Panel
+blue.glass.fancy.desc=Blue Fancy Glass Panel
+blue.glass.noborder.desc=Blue Borderless Glass
+
+brown.bubble.desc=Brown Bubble Glass
+brown.glass.desc=Brown Glass Panel
+brown.glass.fancy.desc=Brown Fancy Glass Panel
+brown.glass.noborder.desc=Brown Borderless Glass
+
+green.bubble.desc=Green Bubble Glass
+green.glass.desc=Green Glass Panel
+green.glass.fancy.desc=Green Fancy Glass Panel
+green.glass.noborder.desc=Green Borderless Glass
+
+red.bubble.desc=Red Bubble Glass
+red.glass.desc=Red Glass Panel
+red.glass.fancy.desc=Red Fancy Glass Panel
+red.glass.noborder.desc=Red Borderless Glass
+
+black.bubble.desc=Black Bubble Glass
+black.glass.desc=Black Glass Panel
+black.glass.fancy.desc=Black Fancy Glass Panel
+black.glass.noborder.desc=Black Borderless Glass
+
+#Stained Glass Pane
+white.pane.bubble.desc=White Bubble Glass
+white.pane.glass.desc=White Glass Panel
+white.pane.glass.fancy.desc=White Fancy Glass Panel
+white.pane.glass.noborder.desc=White Borderless Glass
+white.pane.glass.quadrant.desc=White Quadrant Glass
+white.pane.glass.fancyquadrant.desc=White Fancy Quadrant Glass
+
+orange.pane.bubble.desc=Orange Bubble Glass
+orange.pane.glass.desc=Orange Glass Panel
+orange.pane.glass.fancy.desc=Orange Fancy Glass Panel
+orange.pane.glass.noborder.desc=Orange Borderless Glass
+orange.pane.glass.quadrant.desc=Orange Quadrant Glass
+orange.pane.glass.fancyquadrant.desc=Orange Fancy Quadrant Glass
+
+magenta.pane.bubble.desc=Magenta Bubble Glass
+magenta.pane.glass.desc=Magenta Glass Panel
+magenta.pane.glass.fancy.desc=Magenta Fancy Glass Panel
+magenta.pane.glass.noborder.desc=Magenta Borderless Glass
+magenta.pane.glass.quadrant.desc=Magenta Quadrant Glass
+magenta.pane.glass.fancyquadrant.desc=Magenta Fancy Quadrant Glass
+
+lightblue.pane.bubble.desc=Light Blue Bubble Glass
+lightblue.pane.glass.desc=Light Blue Glass Panel
+lightblue.pane.glass.fancy.desc=Light Blue Fancy Glass Panel
+lightblue.pane.glass.noborder.desc=Light Blue Borderless Glass
+lightblue.pane.glass.quadrant.desc=Light Blue Quadrant Glass
+lightblue.pane.glass.fancyquadrant.desc=Light Blue Fancy Quadrant Glass
+
+yellow.pane.bubble.desc=Yellow Bubble Glass
+yellow.pane.glass.desc=Yellow Glass Panel
+yellow.pane.glass.fancy.desc=Yellow Fancy Glass Panel
+yellow.pane.glass.noborder.desc=Yellow Borderless Glass
+yellow.pane.glass.quadrant.desc=Yellow Quadrant Glass
+yellow.pane.glass.fancyquadrant.desc=Yellow Fancy Quadrant Glass
+
+lime.pane.bubble.desc=Lime Bubble Glass
+lime.pane.glass.desc=Lime Glass Panel
+lime.pane.glass.fancy.desc=Lime Fancy Glass Panel
+lime.pane.glass.noborder.desc=Lime Borderless Glass
+lime.pane.glass.quadrant.desc=Lime Quadrant Glass
+lime.pane.glass.fancyquadrant.desc=Lime Fancy Quadrant Glass
+
+pink.pane.bubble.desc=Pink Bubble Glass
+pink.pane.glass.desc=Pink Glass Panel
+pink.pane.glass.fancy.desc=Pink Fancy Glass Panel
+pink.pane.glass.noborder.desc=Pink Borderless Glass
+pink.pane.glass.quadrant.desc=Pink Quadrant Glass
+pink.pane.glass.fancyquadrant.desc=Pink Fancy Quadrant Glass
+
+darkgray.pane.bubble.desc=Gray Bubble Glass
+darkgray.pane.glass.desc=Gray Glass Panel
+darkgray.pane.glass.fancy.desc=Gray Fancy Glass Panel
+darkgray.pane.glass.noborder.desc=Gray Borderless Glass
+darkgray.pane.glass.quadrant.desc=Gray Quadrant Glass
+darkgray.pane.glass.fancyquadrant.desc=Gray Fancy Quadrant Glass
+
+lightgray.pane.bubble.desc=Light Gray Bubble Glass
+lightgray.pane.glass.desc=Light Gray Glass Panel
+lightgray.pane.glass.fancy.desc=Light Gray Fancy Glass Panel
+lightgray.pane.glass.noborder.desc=Light Gray Borderless Glass
+lightgray.pane.glass.quadrant.desc=Light Gray Quadrant Glass
+lightgray.pane.glass.fancyquadrant.desc=Light Gray Fancy Quadrant Glass
+
+cyan.pane.bubble.desc=Cyan Bubble Glass
+cyan.pane.glass.desc=Cyan Glass Panel
+cyan.pane.glass.fancy.desc=Cyan Fancy Glass Panel
+cyan.pane.glass.noborder.desc=Cyan Borderless Glass
+cyan.pane.glass.quadrant.desc=Cyan Quadrant Glass
+cyan.pane.glass.fancyquadrant.desc=Cyan Fancy Quadrant Glass
+
+purple.pane.bubble.desc=Purple Bubble Glass
+purple.pane.glass.desc=Purple Glass Panel
+purple.pane.glass.fancy.desc=Purple Fancy Glass Panel
+purple.pane.glass.noborder.desc=Purple Borderless Glass
+purple.pane.glass.quadrant.desc=Purple Quadrant Glass
+purple.pane.glass.fancyquadrant.desc=Purple Fancy Quadrant Glass
+
+blue.pane.bubble.desc=Blue Bubble Glass
+blue.pane.glass.desc=Blue Glass Panel
+blue.pane.glass.fancy.desc=Blue Fancy Glass Panel
+blue.pane.glass.noborder.desc=Blue Borderless Glass
+blue.pane.glass.quadrant.desc=Blue Quadrant Glass
+blue.pane.glass.fancyquadrant.desc=Blue Fancy Quadrant Glass
+
+brown.pane.bubble.desc=Brown Bubble Glass
+brown.pane.glass.desc=Brown Glass Panel
+brown.pane.glass.fancy.desc=Brown Fancy Glass Panel
+brown.pane.glass.noborder.desc=Brown Borderless Glass
+brown.pane.glass.quadrant.desc=Brown Quadrant Glass
+brown.pane.glass.fancyquadrant.desc=Brown Fancy Quadrant Glass
+
+green.pane.bubble.desc=Green Bubble Glass
+green.pane.glass.desc=Green Glass Panel
+green.pane.glass.fancy.desc=Green Fancy Glass Panel
+green.pane.glass.noborder.desc=Green Borderless Glass
+green.pane.glass.quadrant.desc=Green Quadrant Glass
+green.pane.glass.fancyquadrant.desc=Green Fancy Quadrant Glass
+
+red.pane.bubble.desc=Red Bubble Glass
+red.pane.glass.desc=Red Glass Panel
+red.pane.glass.fancy.desc=Red Fancy Glass Panel
+red.pane.glass.noborder.desc=Red Borderless Glass
+red.pane.glass.quadrant.desc=Red Quadrant Glass
+red.pane.glass.fancyquadrant.desc=Red Fancy Quadrant Glass
+
+black.pane.bubble.desc=Black Bubble Glass
+black.pane.glass.desc=Black Glass Panel
+black.pane.glass.fancy.desc=Black Fancy Glass Panel
+black.pane.glass.noborder.desc=Black Borderless Glass
+black.pane.glass.quadrant.desc=Black Quadrant Glass
+black.pane.glass.fancyquadrant.desc=Black Fancy Quadrant Glass
+
 # Creative Tab localizations
 itemGroup.tabOtherChiselBlocks=Other Chisel Blocks
 itemGroup.tabStoneChiselBlocks=Stone Chisel Blocks
 itemGroup.tabWoodChiselBlocks=Wood Chisel Blocks
 itemGroup.tabMetalChiselBlocks=Metal Chisel Blocks
 itemGroup.tabModdedChiselBlocks=Modded Chisel Blocks
+itemGroup.tabStairChiselBlocks=Chisel Stairs
 itemGroup.tabChisel=Chisel Items
 
 #Container
