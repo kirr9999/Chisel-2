@@ -62,7 +62,7 @@ repositories {
     
     maven {
         name 'Chisel Repo'
-        url "http://coloredlightscore.us.to/maven/chisel-2"
+        url "http://maven.tterrag.com"
     }
 }
 
