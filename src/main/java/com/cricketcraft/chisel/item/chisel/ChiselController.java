@@ -7,6 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.oredict.OreDictionary;
 
 import com.cricketcraft.chisel.Chisel;
@@ -51,6 +52,11 @@ public final class ChiselController {
 			Block block = event.world.getBlock(x, y, z);
 			int metadata = event.world.getBlockMetadata(x, y, z);
 			ICarvingGroup group = Carving.chisel.getGroup(block, metadata);
+			BlockEvent.BreakEvent breakEvent = new BlockEvent.BreakEvent(x, y, z, event.world, block, metadata, event.entityPlayer);
+		      MinecraftForge.EVENT_BUS.post(breakEvent);
+		      if (breakEvent.isCanceled()) {
+		        return;
+		      }
 
 			if (group == null) {
 				return;

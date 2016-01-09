@@ -1,28 +1,46 @@
 package com.cricketcraft.chisel.entity;
 
 import java.util.Random;
+import java.util.UUID;
 
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.util.FakePlayerFactory;
+import net.minecraftforge.event.world.BlockEvent;
 
 import com.cricketcraft.chisel.init.ChiselBlocks;
+import com.mojang.authlib.GameProfile;
 
 public class EntityCloudInABottle extends EntityThrowable {
 
 	Random rand = new Random();
+	EntityPlayer player;
 
 	public EntityCloudInABottle(World par1World) {
 		super(par1World);
+		if(!par1World.isRemote)
+			player = FakePlayerFactory.get((WorldServer) par1World, new GameProfile(UUID.fromString("745dd166-13e9-41db-999d-6af5bacba7fd"), "[Chisel]"));
 	}
 
 	public EntityCloudInABottle(World par1World, EntityLivingBase par2EntityLiving) {
 		super(par1World, par2EntityLiving);
+		if (par2EntityLiving instanceof EntityPlayer)
+			player = (EntityPlayer)par2EntityLiving;
+		else {
+			if(!par1World.isRemote)
+				player = FakePlayerFactory.get((WorldServer) par1World, new GameProfile(UUID.fromString("745dd166-13e9-41db-999d-6af5bacba7fd"), "[Chisel]"));
+		}
 	}
 
 	public EntityCloudInABottle(World par1World, double x, double y, double z) {
 		super(par1World, x, y, z);
+		if(!par1World.isRemote)
+			player = FakePlayerFactory.get((WorldServer) par1World, new GameProfile(UUID.fromString("745dd166-13e9-41db-999d-6af5bacba7fd"), "[Chisel]"));
 	}
 
 	@Override
@@ -95,7 +113,9 @@ public class EntityCloudInABottle extends EntityThrowable {
 					for (int k2 = y; k2 < y + random.nextInt(1) + 2; k2++) {
 						for (int l2 = z; l2 < z + random.nextInt(4) + 1; l2++) {
 							if (world.getBlock(j2, k2, l2).isAir(world, j2, k2, l2) && Math.abs(j2 - x) + Math.abs(k2 - y) + Math.abs(l2 - z) < 4 * 1 + random.nextInt(2)) {
-								world.setBlock(j2, k2, l2, ChiselBlocks.cloud);
+								BlockEvent.BreakEvent event = new BlockEvent.BreakEvent(j2, k2, l2, world, world.getBlock(j2, k2, l2), world.getBlockMetadata(j2, k2, l2), player);
+								MinecraftForge.EVENT_BUS.post(event);
+								if (!event.isCanceled()) world.setBlock(j2, k2, l2, ChiselBlocks.cloud);
 								count++;
 							}
 						}
